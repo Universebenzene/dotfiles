@@ -69,11 +69,21 @@ set expandtab
 "set ignorecase
 "set hlsearch
 set bg=dark
+"set paste
 filetype plugin indent on
+
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
 set iskeyword+=:
-"set paste
 "let g:ycm_server_keep_logfiles = 1
 "let g:ycm_server_log_level = 'debug'
-let g:ycm_global_ycm_extra_conf = '~/Documents/.ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '~/Documents/.ycm_extra_conf.py'
+
+" vim-airline
+set laststatus=2
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.linenr = '¶'
+let g:airline#extensions#tabline#enabled = 1 " buffertab

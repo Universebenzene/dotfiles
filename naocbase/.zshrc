@@ -117,6 +117,14 @@ fi
 #fi
 #==================================#
 
+#============TMUX-TITLE============#
+case $TERM in
+    screen*)
+        precmd () {print -Pn "\e]0;%n@%m: %~\a"}
+        ;;
+esac
+#==================================#
+
 #=========Science Software=========#
 #export PGPLOT_DEV=/XWINDOW
 export PGPLOT_DEV=/CPS

@@ -12,7 +12,7 @@ else
     local user_dash="%{$fg_bold[black]%}-%{$reset_color%}"
 #   local user_symbol="$"
 fi
-    
+
 local host="%{$fg_bold[cyan]%}%m%{$reset_color%}"
 local circlea="%{$fg[cyan]%}@%{$reset_color%}"
 local time24="%{$fg[yellow]%}%*%{$reset_color%}"

@@ -16,6 +16,7 @@
  }
 
  local menud334dfcea59127bedfcdbe0a3ee7f494 = {
+     {"KolourPaint", "kolourpaint ", "/usr/share/icons/hicolor/16x16/apps/kolourpaint.png" },
      {"Okular", "okular ", "/usr/share/icons/hicolor/16x16/apps/okular.png" },
      {"Ristretto Image Viewer", "ristretto ", "/usr/share/icons/hicolor/16x16/apps/ristretto.png" },
  }

@@ -16,8 +16,8 @@
  }
 
  local menud334dfcea59127bedfcdbe0a3ee7f494 = {
-     {"KolourPaint", "kolourpaint ", "/usr/share/icons/hicolor/16x16/apps/kolourpaint.png" },
      {"Okular", "okular ", "/usr/share/icons/hicolor/16x16/apps/okular.png" },
+     {"Pinta", "pinta ", "/usr/share/icons/hicolor/16x16/apps/pinta.png" },
      {"Ristretto Image Viewer", "ristretto ", "/usr/share/icons/hicolor/16x16/apps/ristretto.png" },
  }
 
@@ -39,6 +39,7 @@
  }
 
  local menue6f43c40ab1c07cd29e4e83e4ef6bf85 = {
+     {"CMake", "cmake-gui ", "/usr/share/icons/hicolor/32x32/apps/CMakeSetup.png" },
      {"Electron", "electron ", "/usr/share/pixmaps/electron.png" },
      {"Qt Assistant", "assistant", "/usr/share/icons/hicolor/32x32/apps/assistant.png" },
      {"Qt Designer", "designer", "/usr/share/icons/hicolor/128x128/apps/QtProject-designer.png" },

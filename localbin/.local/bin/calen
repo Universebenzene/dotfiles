@@ -1,0 +1,2 @@
+#!/bin/bash
+LANG=en_US.UTF-8 cal $1 $2

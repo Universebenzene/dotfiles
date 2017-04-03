@@ -10,6 +10,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
+-- Enable VIM help for hotkeys widget when client with matching name is opened:
+require("awful.hotkeys_popup.keys.vim")
 
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
 -- Xdg Menu
@@ -81,7 +83,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
+beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "xfce4-terminal"
@@ -97,8 +99,8 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.tile.bottom,
     awful.layout.suit.tile,
+    awful.layout.suit.tile.bottom,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.floating,
@@ -141,13 +143,13 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end}
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_menu_icon },
+mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "open terminal", terminal },
                                     { "Applications", xdgmenu }
                                   }
                         })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+mylauncher = awful.widget.launcher({ image = beautiful.awesome_menu_icon,
                                      menu = mymainmenu })
 
 -- Menubar configuration
@@ -194,7 +196,7 @@ local memory = lain.widget.mem({
 mytextclock = wibox.widget.textclock()
 lain.widget.calendar({
 attach_to = { mytextclock },
-notification_preset = { 
+notification_preset = {
     fg = "#aaaaaa",
     bg = "#222222dd",
     position = "top_right",
@@ -235,7 +237,7 @@ the.volume = lain.widget.alsabar({
         voltip:set_markup(string.format("%d%%", volume_now.level))
     end
 })
-volicon:buttons(awful.util.table.join (
+volicon:buttons(gears.table.join (
           awful.button({}, 1, function()
             awful.spawn.with_shell(string.format("%s -e alsamixer", terminal))
           end),
@@ -316,7 +318,7 @@ local mytouchsig = lain.widget.watch({
         end
     end
 })
-touchicon:buttons(awful.util.table.join (
+touchicon:buttons(gears.table.join (
           awful.button({}, 3, function()
             awful.spawn(string.format("xinput set-prop bcm5974 \"Device Enabled\" 1"))
             mytouchsig.update()
@@ -334,7 +336,7 @@ touchicon:buttons(awful.util.table.join (
 --     cmd = "cat /sys/class/net/enp0s3/carrier",
 --     settings = function()
 --         local carrier = output:match("%d")
--- 
+--
 --         if carrier == "1" then
 --             ethicon:set_image(img.ethon)
 --         else
@@ -363,7 +365,7 @@ touchicon:buttons(awful.util.table.join (
 --     settings = function()
 --         local carrier, perc = output:match("(%d)-(%d+)")
 --         local tiptext = output:gsub("(%d)-(%d+)", ""):gsub("%s+$", "")
--- 
+--
 --         if carrier == "1" then
 --             wificon:set_image(img.wifidisc)
 --             wifitooltip:set_markup("No carrier")
@@ -387,7 +389,7 @@ touchicon:buttons(awful.util.table.join (
 -- wificon:connect_signal("button::press", function() awful.spawn(string.format("%s -e wavemon", terminal)) end)
 
 -- Create a wibox for each screen and add it
-local taglist_buttons = awful.util.table.join(
+local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
                     awful.button({ modkey }, 1, function(t)
                                               if client.focus then
@@ -404,7 +406,7 @@ local taglist_buttons = awful.util.table.join(
                     awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end)
                 )
 
-local tasklist_buttons = awful.util.table.join(
+local tasklist_buttons = gears.table.join(
                      awful.button({ }, 1, function (c)
                                               if c == client.focus then
                                                   c.minimized = true
@@ -451,10 +453,10 @@ awful.screen.connect_for_each_screen(function(s)
 
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
     -- Each screen has its own tag table.
-    awful.tag({ "1tte" }, s, awful.layout.layouts[2])
-    tag_names={"2lte","3job","4bro","5soc","6wch","7sys","8","9"}
+    awful.tag({ "1ter" }, s, awful.layout.layouts[1])
+    tag_names={"2ter","3job","4bro","5soc","6wch","7sys","8","9"}
     -- layout_list={"layouts[1]","layouts[1]","layouts[1]","layouts[2]","layouts[2]","layouts[2]","layouts[3]","layouts[3]","layouts[3]"}
-    layout_list={2,2,10,2,10,5,5,5}
+    layout_list={1,1,10,1,10,5,5,5}
     for stag=1, 8 do
         awful.tag.add(tag_names[stag], {
                       screen=s,
@@ -469,7 +471,7 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(awful.util.table.join(
+    s.mylayoutbox:buttons(gears.table.join(
                            awful.button({ }, 1, function () awful.layout.inc( 1) end),
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc(-1) end),
@@ -517,7 +519,7 @@ end)
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(awful.util.table.join(
+root.buttons(gears.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewprev),
     awful.button({ }, 5, awful.tag.viewnext)
@@ -525,7 +527,7 @@ root.buttons(awful.util.table.join(
 -- }}}
 
 -- {{{ Key bindings
-globalkeys = awful.util.table.join(
+globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
@@ -616,7 +618,7 @@ globalkeys = awful.util.table.join(
                     prompt       = "Run Lua code: ",
                     textbox      = awful.screen.focused().mypromptbox.widget,
                     exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
+                    history_path = gears.filesystem.get_cache_dir() .. "/history_eval"
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
@@ -625,10 +627,10 @@ globalkeys = awful.util.table.join(
               {description = "show the menubar", group = "launcher"}),
 
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
-	-- Calendar
-	awful.key({ modkey }, "c", function () lain.widget.calendar.show(7) end, 
+    -- Calendar
+    awful.key({ modkey }, "c", function () lain.widget.calendar.show(7) end,
               {description = "show the calendar", group = "lain"}),
-	awful.key({ modkey, "Control" }, "c", function () lain.widget.calendar.hide(7) end,
+    awful.key({ modkey, "Control" }, "c", function () lain.widget.calendar.hide(7) end,
               {description = "hide the calendar", group = "lain"}),
 
     -- ALSA volume control
@@ -658,11 +660,11 @@ globalkeys = awful.util.table.join(
 --          the.volume.update()
 --      end),
 
-	--	awful.key({ modkey }, "z",
-	--			function ()
-	--					os.execute(string.format("amixer -q set %s 0%%", the.volume.channel))
-	--					the.volume.update()
-	--			end)
+--  awful.key({ modkey }, "z",
+--		function ()
+--			os.execute(string.format("amixer -q set %s 0%%", the.volume.channel))
+--			the.volume.update()
+--		end)
     -- TouchPad Control
     awful.key({}, "XF86LaunchB",
         function ()
@@ -708,10 +710,10 @@ globalkeys = awful.util.table.join(
         {description = "refresh some widgets", group = "extra"})
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-    
+
 )
 
-clientkeys = awful.util.table.join(
+clientkeys = gears.table.join(
     awful.key({ modkey,           }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
@@ -741,21 +743,31 @@ clientkeys = awful.util.table.join(
             c:raise()
         end ,
         {description = "maximize", group = "client"}),
-
+    awful.key({ modkey, "Control" }, "m",
+        function (c)
+            c.maximized_vertical = not c.maximized_vertical
+            c:raise()
+        end ,
+        {description = "(un)maximize vertically", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "m",
+        function (c)
+            c.maximized_horizontal = not c.maximized_horizontal
+            c:raise()
+        end ,
+        {description = "(un)maximize horizontally", group = "client"}),
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
     awful.key({ modkey,           }, "i",
         awful.titlebar.toggle,
         {description = "toggle title bar", group = "client"})
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
 )
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
-    globalkeys = awful.util.table.join(globalkeys,
+    globalkeys = gears.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
                   function ()
@@ -801,7 +813,7 @@ for i = 1, 9 do
     )
 end
 
-clientbuttons = awful.util.table.join(
+clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
@@ -866,27 +878,27 @@ awful.rules.rules = {
     -- Set Firefox to always map on the tag named "2" on screen 1.
 --     { rule = { class = "Soffice" .. "." },
 --       properties = { screen = 2, tag = "3job" } },
-    { rule = { 
+    { rule = {
         class = "Evince" },
       properties = {  tag = "3job" } },
-    { rule = { 
+    { rule = {
         class = "Firefox" },
       properties = {  tag = "4bro" } },
-    { rule = { 
+    { rule = {
         class = "TelegramDesktop" },
       properties = {  tag = "5soc" } },
-    { rule = { 
+    { rule = {
         class = "Evolution" },
       properties = {  tag = "5soc" } },
-    { rule = { 
+    { rule = {
         class = "Gnome-system-monitor" },
       properties = {  tag = "7sys" } },
-    { rule = { 
+    { rule = {
         class = "Gimp-2.8" },
       properties = {  tag = "8" } },
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  
+
 }
 -- }}}
 
@@ -908,7 +920,7 @@ end)
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
     -- buttons for the titlebar
-    local buttons = awful.util.table.join(
+    local buttons = gears.table.join(
         awful.button({ }, 1, function()
             client.focus = c
             c:raise()
@@ -992,28 +1004,3 @@ awful.spawn.with_shell(mytouchsig.update())
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- }}}
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 
--- 

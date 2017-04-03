@@ -869,17 +869,17 @@ awful.rules.rules = {
 --     { rule = { class = "Soffice" .. "." },
 --       properties = { screen = 2, tag = "3job" } },
     { rule = {
-        class = "Evince" },
-      properties = {  tag = "3job" } },
+        class = "okular" },
+      properties = {  tag = "3til" } },
     { rule = {
         class = "Firefox" },
-      properties = {  tag = "4bro" } },
-    { rule = {
-        class = "TelegramDesktop" },
-      properties = {  tag = "5soc" } },
+      properties = {  tag = "5bro" } },
+--  { rule = {
+--      class = "TelegramDesktop" },
+--    properties = {  tag = "5soc" } },
     { rule = {
         class = "Thunderbird" },
-      properties = {  tag = "5soc" } },
+      properties = {  tag = "6soc" } },
     { rule = {
         class = "Gnome-system-monitor" },
       properties = {  tag = "7sys" } },

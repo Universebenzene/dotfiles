@@ -862,7 +862,8 @@ awful.rules.rules = {
         name = {
           "Event Tester",  -- xev.
           "Load New Table", -- topcat browser
-          "我的足迹"       -- firefox history
+          "我的足迹",      -- firefox history
+          "关于 Mozilla Firefox" -- about firefox
         },
         role = {
           "AlarmWindow",  -- Thunderbird's calendar.
@@ -879,7 +880,7 @@ awful.rules.rules = {
 --     { rule = { class = "Soffice" .. "." },
 --       properties = { screen = 2, tag = "3job" } },
     { rule = {
-        class = "Evince" },
+        class = "okular" },
       properties = {  tag = "3job" } },
     { rule = {
         class = "Firefox" },

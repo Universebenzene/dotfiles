@@ -402,9 +402,12 @@ local taglist_buttons = gears.table.join(
                                                   client.focus:toggle_tag(t)
                                               end
                                           end),
+-- -- -- -- -- Benzene's Own Config -- -- -- -- --
                     awful.button({ }, 4, function(t) awful.tag.viewprev(t.screen) end),
                     awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end)
                 )
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 local tasklist_buttons = gears.table.join(
                      awful.button({ }, 1, function (c)
@@ -521,8 +524,11 @@ end)
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
+-- -- -- -- -- Benzene's Own Config -- -- -- -- --
     awful.button({ }, 4, awful.tag.viewprev),
     awful.button({ }, 5, awful.tag.viewnext)
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 ))
 -- }}}
 

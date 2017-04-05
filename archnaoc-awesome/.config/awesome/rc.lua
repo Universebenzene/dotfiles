@@ -643,7 +643,7 @@ globalkeys = gears.table.join(
             os.execute(string.format("amixer set Master toggle", the.volume.togglechannel or the.volume.channel))
             the.volume.update()
         end,
-        {description = "volume mute", group = "extra"}),
+        {description = "volume mute", group = "lain"}),
 --  awful.key({ altkey, "Control" }, "m",
 --      function ()
 --          os.execute(string.format("amixer set %s 100%%", the.volume.channel))

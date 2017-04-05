@@ -13,10 +13,13 @@ local theme = {}
 
 theme.font          = "Cantarell 9.5"
 
-theme.bg_normal     = "#222222ee"
-theme.bg_focus      = "#535d6caa"
+--theme.bg_normal   = "#222222ee"
+theme.bg_normal     = "#222222cf"
+--theme.bg_focus    = "#535d6caa"
+theme.bg_focus      = "#535d6cdd"
 theme.bg_urgent     = "#ff0000aa"
-theme.bg_minimize   = "#44444488"
+--theme.bg_minimize = "#444488"
+theme.bg_minimize   = "#667788"
 theme.bg_systray    = "#22222200"
 
 theme.fg_normal     = "#aaaaaa"
@@ -35,6 +38,12 @@ theme.border_marked = "#91231c"
 -- defined, the sets are:
 -- taglist_[bg|fg]_[focus|urgent|occupied|empty|volatile]
 -- tasklist_[bg|fg]_[focus|urgent]
+theme.tasklist_fg_focus = "#ffffff"
+theme.tasklist_fg_normal = "#aaaaaa"
+theme.tasklist_fg_minimize = "#505050"
+theme.tasklist_bg_focus = "#535d6caa"
+theme.tasklist_bg_normal = "#535d6c00"
+theme.tasklist_bg_minimize = "#55555500"
 -- titlebar_[bg|fg]_[normal|focus]
 theme.titlebar_bg_focus = "#535d6cdd"
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]

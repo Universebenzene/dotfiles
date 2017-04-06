@@ -198,7 +198,7 @@ lain.widget.calendar({
 attach_to = { mytextclock },
 notification_preset = {
     fg = "#aaaaaa",
-    bg = "#222222dd",
+    bg = "#222222cf",
     position = "top_right",
     font = "Source Code Pro 11"
 }
@@ -858,7 +858,8 @@ awful.rules.rules = {
         name = {
           "Event Tester",  -- xev.
           "Load New Table", -- topcat browser
-          "我的足迹"       -- firefox history
+          "我的足迹",      -- firefox history
+          "关于 Mozilla Firefox" -- about firefox
         },
         role = {
           "AlarmWindow",  -- Thunderbird's calendar.

@@ -198,7 +198,7 @@ lain.widget.calendar({
 attach_to = { mytextclock },
 notification_preset = {
     fg = "#aaaaaa",
-    bg = "#222222dd",
+    bg = "#222222cf",
     position = "top_right",
     font = "Source Code Pro 11"
 }

@@ -11,7 +11,7 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "Cantarell 8.5"
+theme.font          = "Cantarell 8.4"
 
 --theme.bg_normal   = "#222222ee"
 theme.bg_normal     = "#222222cf"

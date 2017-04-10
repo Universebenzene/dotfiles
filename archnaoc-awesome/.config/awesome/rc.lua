@@ -175,8 +175,8 @@ local netupinfo = lain.widget.net({
 --          theme.weather.update()
 --      end
 
-        widget:set_markup(markup.fontfg("Cantarell 9", "#e54c62", net_now.sent .. "    "))
-        netdowninfo:set_markup(markup.fontfg("Cantarell 9", "#87af5f", net_now.received .. " "))
+        widget:set_markup(markup.fontfg("Cantarell 8.5", "#e54c62", net_now.sent .. "    "))
+        netdowninfo:set_markup(markup.fontfg("Cantarell 8.5", "#87af5f", net_now.received .. " "))
     end
 })
 
@@ -185,8 +185,8 @@ local memicon = wibox.widget.imagebox(img.widget_mem)
 local swapinfo = wibox.widget.textbox()
 local memory = lain.widget.mem({
     settings = function()
-        widget:set_markup(markup.fontfg("Cantarell 9", "#e0da37", " " .. mem_now.used .. "M(" .. mem_now.perc .. "%) "))
-        swapinfo:set_markup(markup.fontfg("Cantarell 9", "#399C20", "/" .. mem_now.swapused .. "M "))
+        widget:set_markup(markup.fontfg("Cantarell 8.5", "#e0da37", " " .. mem_now.used .. "M(" .. mem_now.perc .. "%) "))
+        swapinfo:set_markup(markup.fontfg("Cantarell 8.5", "#399C20", "/" .. mem_now.swapused .. "M "))
     end
 })
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -476,7 +476,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, bg = "#00000000", height = 23 })
+    s.mywibox = awful.wibar({ position = "top", screen = s, bg = "#00000000", height = 21 })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -853,7 +853,8 @@ awful.rules.rules = {
           "Wpa_gui",
           "pinentry",
           "veromix",
-          "xtightvncviewer"},
+          "xtightvncviewer",
+          " "},         -- others
 
         name = {
           "Event Tester",  -- xev.

@@ -47,12 +47,12 @@ img.wififull                                  = "/home/benzene/.config/awesome/i
 img.wifihigh                                  = "/home/benzene/.config/awesome/icons/wireless-high.png"
 img.wifilow                                   = "/home/benzene/.config/awesome/icons/wireless-low.png"
 img.wifimed                                   = "/home/benzene/.config/awesome/icons/wireless-medium.png"
-img.wifinone 									= "/home/benzene/.config/awesome/icons/wireless-none.png"
+img.wifinone 								  = "/home/benzene/.config/awesome/icons/wireless-none.png"
 img.widget_netdown                            = "/home/benzene/.config/awesome/icons/net_down.png"
 img.widget_netup                              = "/home/benzene/.config/awesome/icons/net_up.png"
 img.widget_mem                                = "/home/benzene/.config/awesome/icons/device-ram.png"
 img.touchpad_enabled                          = "/home/benzene/.config/awesome/icons/input-touchpad-symbolic.png"
-img.touchpad_disabled                                = "/home/benzene/.config/awesome/icons/touchpad-disabled-symbolic.png"
+img.touchpad_disabled                         = "/home/benzene/.config/awesome/icons/touchpad-disabled-symbolic.png"
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -447,13 +447,13 @@ awful.screen.connect_for_each_screen(function(s)
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
     -- Each screen has its own tag table.
     awful.tag({ "1til" }, s, awful.layout.layouts[1])
-    tag_names={"2til","3til","4til","5bro","6soc","7sys","8","9"}
+    tag_names = { "2til", "3til", "4til", "5bro", "6soc", "7sys", "8", "9" }
     -- layout_list={"layouts[1]","layouts[1]","layouts[1]","layouts[2]","layouts[2]","layouts[2]","layouts[3]","layouts[3]","layouts[3]"}
-    layout_list={1,1,1,10,1,5,5,5}
-    for stag=1, 8 do
+    layout_list = { 1, 1, 1, 10, 1, 5, 5, 5 }
+    for stag = 1, 8 do
         awful.tag.add(tag_names[stag], {
-                      screen=s,
-                      layout=awful.layout.layouts[layout_list[stag]],
+                      screen = s,
+                      layout = awful.layout.layouts[layout_list[stag]],
                   })
               end
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -525,7 +525,7 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
+              {description = "show help", group = "awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
@@ -933,7 +933,7 @@ client.connect_signal("request::titlebars", function(c)
 
 
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
-    awful.titlebar(c,{size=16}) : setup {
+    awful.titlebar(c, { size = 16 }) : setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,

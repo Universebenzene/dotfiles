@@ -13,9 +13,11 @@
 
  local menude7a22a0c94aa64ba2449e520aa20c99 = {
      {"GoldenDict", "goldendict", "/usr/share/pixmaps/goldendict.png" },
+     {"LibreOffice Math", "libreoffice --math ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-math.png" },
  }
 
  local menud334dfcea59127bedfcdbe0a3ee7f494 = {
+     {"LibreOffice Draw", "libreoffice --draw ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-draw.png" },
      {"Okular", "okular ", "/usr/share/icons/hicolor/16x16/apps/okular.png" },
      {"Pinta", "pinta ", "/usr/share/icons/hicolor/16x16/apps/pinta.png" },
      {"Ristretto Image Viewer", "ristretto ", "/usr/share/icons/hicolor/16x16/apps/ristretto.png" },
@@ -31,6 +33,13 @@
 
  local menudf814135652a5a308fea15bff37ea284 = {
      {"GoldenDict", "goldendict", "/usr/share/pixmaps/goldendict.png" },
+     {"LibreOffice", "libreoffice ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-startcenter.png" },
+     {"LibreOffice Base", "libreoffice --base ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-base.png" },
+     {"LibreOffice Calc", "libreoffice --calc ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-calc.png" },
+     {"LibreOffice Draw", "libreoffice --draw ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-draw.png" },
+     {"LibreOffice Impress", "libreoffice --impress ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-impress.png" },
+     {"LibreOffice Math", "libreoffice --math ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-math.png" },
+     {"LibreOffice Writer", "libreoffice --writer ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-writer.png" },
      {"Okular", "okular ", "/usr/share/icons/hicolor/16x16/apps/okular.png" },
  }
 
@@ -66,6 +75,7 @@
      {"Avahi Zeroconf Browser", "/usr/bin/avahi-discover", "/usr/share/icons/gnome/16x16/devices/network-wired.png" },
      {"Bulk Rename", "/usr/lib/Thunar/ThunarBulkRename ", "/usr/share/icons/hicolor/16x16/apps/Thunar.png" },
      {"Fcitx", "fcitx", "/usr/share/icons/hicolor/16x16/apps/fcitx.png" },
+     {"Manage Printing", "/usr/bin/xdg-open http://localhost:631/", "/usr/share/icons/hicolor/16x16/apps/cups.png" },
      {"System Monitor", "gnome-system-monitor", "/usr/share/icons/gnome/16x16/apps/utilities-system-monitor.png" },
      {"Thunar File Manager", "thunar ", "/usr/share/icons/hicolor/16x16/apps/Thunar.png" },
      {"Xfce Terminal", "xfce4-terminal", "/usr/share/icons/gnome/16x16/apps/utilities-terminal.png" },

@@ -40,7 +40,7 @@
             \setCJKmainfont
               [
                       cmap = UniGB-UTF16-H ,
-                  BoldFont = FandolHei-Bold.otf ,%song
+                  BoldFont = FandolHei-Regular.otf ,%song
                 ItalicFont = FandolKai-Regular.otf
               ] { FandolSong-Regular.otf }
             \setCJKsansfont
@@ -52,7 +52,7 @@
             \setCJKfamilyfont { zhsong }
               [
                     cmap = UniGB-UTF16-H ,
-                BoldFont = FandolHei-Bold.otf%song
+                BoldFont = FandolHei-Regular.otf%song
               ] { FandolSong-Regular.otf }
             \setCJKfamilyfont { zhhei }
               [
@@ -83,12 +83,12 @@
   }
   {
     \setCJKmainfont
-      [ Extension = .otf , BoldFont = FandolHei-Bold , ItalicFont = FandolKai-Regular ]%song
+      [ Extension = .otf , BoldFont = FandolHei-Regular , ItalicFont = FandolKai-Regular ]%song
       { FandolSong-Regular }
     \setCJKsansfont [ Extension = .otf , BoldFont = FandolHei-Bold ] { FandolHei-Regular }
     \setCJKmonofont [ Extension = .otf ] { FandolFang-Regular }
     \setCJKfamilyfont { zhsong }
-      [ Extension = .otf , BoldFont = FandolHei-Bold ] { FandolSong-Regular }%song
+      [ Extension = .otf , BoldFont = FandolHei-Regular ] { FandolSong-Regular }%song
     \setCJKfamilyfont { zhhei }
       [ Extension = .otf , BoldFont = FandolHei-Bold ] { FandolHei-Regular }
     \setCJKfamilyfont { zhfs }  [ Extension = .otf ] { FandolFang-Regular }

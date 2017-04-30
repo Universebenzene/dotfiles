@@ -18,6 +18,7 @@ require("awful.hotkeys_popup.keys.vim")
 local xdg_menu = require("archmenu")
 -- Lain
 local lain = require("lain")
+local lainwatch = require("lainwatch")
 local markup = lain.util.markup
 -- Widgets icons
 img                                           = {}
@@ -305,7 +306,7 @@ local bat = lain.widget.bat({
 
 -- TouchPad
 local touchicon = wibox.widget.imagebox()
-local mytouchsig = lain.widget.watch({
+local mytouchsig = lainwatch({
 --  cmd = "/home/benzene/.local/bin/touchpadstatus",
     cmd = { awful.util.shell, "-c", "xinput list-props bcm5974 | awk 'NR==2 {printf(\"%d\\n\",$4)}'" },
     settings = function()
@@ -332,7 +333,7 @@ touchicon:buttons(gears.table.join (
 
 -- Ethernet status
 -- local ethicon = wibox.widget.imagebox()
--- local myethsig = lain.widget.watch({
+-- local myethsig = lainwatch({
 --     cmd = "cat /sys/class/net/enp0s3/carrier",
 --     settings = function()
 --         local carrier = output:match("%d")

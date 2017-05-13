@@ -78,6 +78,17 @@ let g:tex_flavor = "latex"
 "let g:ycm_server_keep_logfiles = 1
 "let g:ycm_server_log_level = 'debug'
 "let g:ycm_global_ycm_extra_conf = '~/Documents/.ycm_extra_conf.py'
+if exists("g:loaded_fix_indentkeys")
+    finish
+endif
+
+let g:loaded_fix_indentkeys = 1
+
+" Set indentkeys option again on changed filetype option.
+" This fixes TeX \item indentation in combination with YouCompleteMe.
+" See https://github.com/Valloric/YouCompleteMe/issues/1244
+" You may add more filetypes if necessary.
+autocmd FileType tex,plaintex execute "setlocal indentkeys=" . &indentkeys
 
 " vim-airline
 set laststatus=2

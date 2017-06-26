@@ -322,16 +322,30 @@ volicon:buttons(gears.table.join (
 
 
 -- Ethernet status
-local ethicon = wibox.widget.imagebox()
+local ethicon1 = wibox.widget.imagebox()
 local myethsig = lainwatch({
     cmd = "cat /sys/class/net/enp0s25/carrier",
     settings = function()
         local carrier = output:match("%d")
 
         if carrier == "1" then
-            ethicon:set_image(img.ethon)
+            ethicon1:set_image(img.ethon)
         else
-            ethicon:set_image(img.ethoff)
+            ethicon1:set_image(img.ethoff)
+        end
+    end
+})
+
+local ethicon2 = wibox.widget.imagebox()
+local myethsig = lainwatch({
+    cmd = "cat /sys/class/net/enp7s0/carrier",
+    settings = function()
+        local carrier = output:match("%d")
+
+        if carrier == "1" then
+            ethicon2:set_image(img.ethon)
+        else
+            ethicon2:set_image(img.ethoff)
         end
     end
 })
@@ -501,7 +515,8 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
-            ethicon,
+            ethicon1,
+            ethicon2,
             mytextclock,
             --wificon,
             volicon,

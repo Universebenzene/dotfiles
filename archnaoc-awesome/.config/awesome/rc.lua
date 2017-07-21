@@ -194,16 +194,80 @@ local memory = lain.widget.mem({
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
-lain.widget.calendar({
-attach_to = { mytextclock },
-notification_preset = {
-    fg = "#aaaaaa",
-    bg = "#222222cf",
-    position = "top_right",
-    font = "Source Code Pro 11"
-}
+local mytextclock = wibox.widget.textclock()
+-- -- -- -- -- Benzene's Own Config -- -- -- -- --
+local function rounded_shape(size, partial)
+    if partial == 1 then
+        return function(cr, width, height)
+                   gears.shape.partially_rounded_rect(cr, width, height,
+                        false, true, false, true, size)
+               end
+    elseif partial == 2 then
+        return function(cr, width, height)
+                   gears.shape.partially_rounded_rect(cr, width, height,
+                        true, true, false, false, size)
+               end
+     else
+        return function(cr, width, height)
+                   gears.shape.rounded_rect(cr, width, height, size)
+               end
+    end
+end
+local month_calendar = awful.widget.calendar_popup.month({
+    position = "tr",
+    opacity = 1,
+    font = "Cantarell 10",
+    week_numbers = 1,
+    bg = "#00000000",
+    start_sunday = 1,
+    long_weekdays = 1,
+    style_month = {
+        shape = rounded_shape(12, 2),
+        padding = 4,
+        bg_color = "#aaaaaa8f",
+        border_color = "#b9214faa"
+    },
+     style_header = {
+        shape = rounded_shape(6),
+        padding = 1,
+        fg_color = "#222222",
+        bg_color = "#6181ffaa",
+        border_color = "#6181ffaa"
+    },
+    style_weekday = {
+        shape = rounded_shape(5),
+        fg_color = "#222222",
+        bg_color = "#de5e1eaa",
+        border_color = "#de5e1e00"
+    },
+    style_weeknumber = {
+        shape = rounded_shape(5),
+        fg_color = "#222222",
+        bg_color = "#2eea17aa",
+        border_color = "2eea17aa"
+    },
+    style_normal = {
+        fg_color = "#000000",
+        bg_color = "#667788aa",
+        border_color = "#22222200",
+    },
+    style_focus = {
+        shape = rounded_shape(5, 1),
+        fg_color = "#000000",
+        bg_color = "#1793d1ee",
+        border_color = "#1793d1aa"
+    }
 })
+month_calendar:attach( mytextclock, "tr" )
+--lain.widget.calendar({
+--attach_to = { mytextclock },
+--notification_preset = {
+--    fg = "#aaaaaa",
+--    bg = "#222222cf",
+--    position = "top_right",
+--    font = "Source Code Pro 11"
+--}
+--})
 
 
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
@@ -640,10 +704,12 @@ globalkeys = gears.table.join(
 
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
     -- Calendar
-    awful.key({ modkey }, "c", function () lain.widget.calendar.show(7) end,
-              {description = "show the calendar", group = "lain"}),
-    awful.key({ modkey, "Control" }, "c", function () lain.widget.calendar.hide(7) end,
-              {description = "hide the calendar", group = "lain"}),
+    --awful.key({ modkey }, "c", function () lain.widget.calendar.show(7) end,
+    --          {description = "show the calendar", group = "lain"}),
+    --awful.key({ modkey, "Control" }, "c", function () lain.widget.calendar.hide(7) end,
+    --          {description = "hide the calendar", group = "lain"}),
+    awful.key({ modkey }, "c", function() month_calendar:toggle() end,
+              {description = "toggle calendar visiblility", group = "awesome"}),
 
     -- ALSA volume control
     awful.key({ modkey }, "a",
@@ -672,11 +738,11 @@ globalkeys = gears.table.join(
 --          the.volume.update()
 --      end),
 
---	awful.key({ modkey }, "z",
---			function ()
---					os.execute(string.format("amixer -q set %s 0%%", the.volume.channel))
---					the.volume.update()
---			end)
+--  awful.key({ modkey }, "z",
+--		function ()
+--			os.execute(string.format("amixer -q set %s 0%%", the.volume.channel))
+--			the.volume.update()
+--		end)
     -- TouchPad Control
 --    awful.key({}, "XF86LaunchB",
 --        function ()
@@ -872,7 +938,7 @@ awful.rules.rules = {
           "pinentry",
           "veromix",
           "xtightvncviewer",
-          " "},         -- others
+          " "},          -- others
 
         name = {
           "Event Tester",  -- xev.

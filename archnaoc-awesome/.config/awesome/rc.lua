@@ -938,8 +938,8 @@ awful.rules.rules = {
           "pinentry",
           "veromix",
           "xtightvncviewer",
-          " "},          -- others
-
+          "matplotlib"   -- python-matplotlib
+        },
         name = {
           "Event Tester",  -- xev.
           "Load New Table", -- topcat browser

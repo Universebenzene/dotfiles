@@ -60,12 +60,12 @@ endif
 set mouse=
 "syntax on
 set nu
-"set autoindent
-set cindent
-set shiftwidth=4
-set ai!
-set tabstop=4
-set expandtab
+set autoindent      "ai
+"set cindent
+set smartindent     "si
+set shiftwidth=4    "indent length
+set tabstop=4       "tabwidth=4 spaces
+set expandtab       "change tab into space
 "set ignorecase
 "set hlsearch
 set bg=dark

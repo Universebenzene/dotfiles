@@ -167,8 +167,9 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 the={}
 local netdownicon = wibox.widget.imagebox(img.widget_netdown)
 local netdowninfo = wibox.widget.textbox()
+local netupinfo = wibox.widget.textbox()
 local netupicon = wibox.widget.imagebox(img.widget_netup)
-local netupinfo = lain.widget.net({
+local netwidget = lain.widget.net({
     settings = function()
 --      if iface ~= "network off" and
 --         string.match(theme.weather.widget.text, "N/A")
@@ -176,7 +177,7 @@ local netupinfo = lain.widget.net({
 --          theme.weather.update()
 --      end
 
-        widget:set_markup(markup.fontfg("Cantarell 9", "#e54c62", net_now.sent .. "    "))
+        netupinfo:set_markup(markup.fontfg("Cantarell 9", "#e54c62", net_now.sent .. "    "))
         netdowninfo:set_markup(markup.fontfg("Cantarell 9", "#87af5f", net_now.received .. " "))
     end
 })
@@ -567,7 +568,7 @@ awful.screen.connect_for_each_screen(function(s)
             netdownicon,
             netdowninfo,
             netupicon,
-            netupinfo.widget,
+            netupinfo,
             memicon,
             memory.widget,
             swapinfo,

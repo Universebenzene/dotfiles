@@ -129,6 +129,7 @@ esac
 #export PGPLOT_DEV=/XWINDOW
 export PGPLOT_DEV=/CPS
 export PGPLOT_FONT=/usr/lib/grfont.dat
+export PGPLOT_RGB=/usr/lib/rgb.txt
 #==================================#
 
 #=========Other zsh Plugins========#

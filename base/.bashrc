@@ -45,5 +45,6 @@ esac
 #=========Science Software=========#
 export PGPLOT_DEV=/XWINDOW
 export PGPLOT_FONT=/usr/lib/grfont.dat
+export PGPLOT_RGB=/usr/lib/rgb.txt
 #export NETPBM_INC="-I/usr/include/netpbm"
 #export NETPBM_LIB="-L/usr/lib -lnetpbm"

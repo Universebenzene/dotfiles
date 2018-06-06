@@ -1,0 +1,55 @@
+%%---------xetex/xelatex 字体设定宏包------------------%%
+\ProvidesPackage{zhfontcfg}
+\usepackage[cm-default]{fontspec}
+%[cm-default]选项主要用来解决使用数学环境时数学符号不能正常显示的问题
+\usepackage[BoldFont,SlantFont,CJKchecksingle]{xeCJK}
+%BoldFont启用粗体字，SlantFont启用斜体字，CJKchecksingle避免单个汉子独占一行
+\usepackage{xunicode,xltxtra}
+\defaultfontfeatures{Mapping=tex-text}
+%如果没有它，会有一些 tex 特殊字符无法正常使用，比如连字符。
+
+%%-------------- 中文断行------------------%%
+\XeTeXlinebreaklocale "zh" %断行中文标记
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt %中文断行间距细微弹性调整
+
+%%----将系统字体名映射为逻辑字体名称，主要是为了维护的方便----%%
+\setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]{SimSun}
+\setCJKsansfont{SimHei}
+\setCJKmonofont{FangSong}
+%\setmainfont{Times New Roman}
+\setCJKfamilyfont{zhsong}{SimSun}
+\setCJKfamilyfont{zhhei}{SimHei}
+\setCJKfamilyfont{zhkai}{KaiTi}
+\setCJKfamilyfont{zhfs}{FangSong}
+
+%%------设置常用字体命令-----------%%
+\newcommand{\songti}{\CJKfamily{zhsong}} % 宋体
+\newcommand{\heiti}{\CJKfamily{zhhei}}   % 黑体
+\newcommand{\kaishu}{\CJKfamily{zhkai}}  % 楷书
+\newcommand{\fangsong}{\CJKfamily{zhfs}} % 仿宋
+%设置字体命令，对标题不适用，比如章节、摘要、目录等
+%可以加在环境中，只对该环境有效
+%修改某几个字{\songti \erhao 测试中文改变字体}
+
+%---------设置常用字号命令,作用范围同字体命令--------%%
+\newcommand{\chuhao}{\fontsize{42.16pt}{\baselineskip}\selectfont}     %初号
+\newcommand{\xiaochuhao}{\fontsize{36.14pt}{\baselineskip}\selectfont} %小初号
+\newcommand{\yihao}{\fontsize{26.10pt}{\baselineskip}\selectfont}      %一号
+\newcommand{\xiaoyihao}{\fontsize{24.09pt}{\baselineskip}\selectfont}  %小一号
+\newcommand{\erhao}{\fontsize{22.08pt}{\baselineskip}\selectfont}      %二号
+\newcommand{\xiaoerhao}{\fontsize{18.07pt}{\baselineskip}\selectfont}  %小二号
+\newcommand{\sanhao}{\fontsize{16.06pt}{\baselineskip}\selectfont}  %三号
+\newcommand{\xiaosanhao}{\fontsize{15.06pt}{\baselineskip}\selectfont} %小三号
+\newcommand{\sihao}{\fontsize{14.05pt}{\baselineskip}\selectfont}%     四号
+\newcommand{\xiaosihao}{\fontsize{12.05pt}{\baselineskip}\selectfont}  %小四号
+\newcommand{\wuhao}{\fontsize{10.54pt}{\baselineskip}\selectfont}    %五号
+\newcommand{\xiaowuhao}{\fontsize{9.03pt}{\baselineskip}\selectfont}   %小五号
+\newcommand{\liuhao}{\fontsize{7.53pt}{\baselineskip}\selectfont}  %六号
+\newcommand{\xiaoliuhao}{\fontsize{6.52pt}{\baselineskip}\selectfont}  %小六号
+\newcommand{\qihao}{\fontsize{5.52pt}{\baselineskip}\selectfont}    %七号
+\newcommand{\bahao}{\fontsize{5.02pt}{\baselineskip}\selectfont}    %八号
+
+%%---------标题名称中文化--------------%%
+\renewcommand\contentsname{目\ 录}  %目录
+\renewcommand\figurename{图}       %图
+\renewcommand\tablename{表}        %表

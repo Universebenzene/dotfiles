@@ -957,9 +957,9 @@ awful.rules.rules = {
     -- Set Firefox to always map on the tag named "2" on screen 1.
 --     { rule = { class = "Soffice" .. "." },
 --       properties = { screen = 2, tag = "3job" } },
-    { rule = {
-        class = "okular" },
-      properties = {  tag = "3job" } },
+--  { rule = {
+--      class = "okular" },
+--    properties = {  tag = "3job" } },
     { rule = {
         class = "Firefox" },
       properties = {  tag = "4bro" } },
@@ -973,7 +973,7 @@ awful.rules.rules = {
         class = "Gnome-system-monitor" },
       properties = {  tag = "7sys" } },
     { rule = {
-        class = "Gimp-2.8" },
+        class = "Gimp-2.10" },
       properties = {  tag = "8" } },
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

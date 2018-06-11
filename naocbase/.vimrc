@@ -98,6 +98,8 @@ if !exists('g:airline_symbols')
 endif
 let g:airline_symbols.linenr = '¶'
 let g:airline#extensions#tabline#enabled = 1 " buffertab
+nnoremap <C-N> :bn<CR>
+nnoremap <C-P> :bp<CR>
 
 " vim in tmux
 if &term =~ '^screen'

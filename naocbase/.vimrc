@@ -101,6 +101,16 @@ let g:airline#extensions#tabline#enabled = 1 " buffertab
 nnoremap <C-N> :bn<CR>
 nnoremap <C-P> :bp<CR>
 
+" NERDTree
+map <F2> :NERDTreeToggle<CR>
+
+"split navigations
+let g:C_Ctrl_j = 'off'
+nnoremap <C-_> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " vim in tmux
 if &term =~ '^screen'
     " tmux will send xterm-style keys when its xterm-keys option is on

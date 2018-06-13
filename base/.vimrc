@@ -89,6 +89,21 @@ let g:loaded_fix_indentkeys = 1
 " See https://github.com/Valloric/YouCompleteMe/issues/1244
 " You may add more filetypes if necessary.
 autocmd FileType tex,plaintex execute "setlocal indentkeys=" . &indentkeys
+" fix meta-keys which generate <Esc>a .. <Esc>z
+"let c='a'
+"while c <= 'z'
+"  exec "set <M-".toupper(c).">=\e".c
+"  exec "imap \e".c." <M-".toupper(c).">"
+"  let c = nr2char(1+char2nr(c))
+"endw
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+
+set timeout ttimeoutlen=50
 
 " vim-airline
 set laststatus=2

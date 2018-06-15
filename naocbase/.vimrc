@@ -89,6 +89,7 @@ let g:loaded_fix_indentkeys = 1
 " See https://github.com/Valloric/YouCompleteMe/issues/1244
 " You may add more filetypes if necessary.
 autocmd FileType tex,plaintex execute "setlocal indentkeys=" . &indentkeys
+
 " fix meta-keys which generate <Esc>a .. <Esc>z
 "let c='a'
 "while c <= 'z'
@@ -118,6 +119,11 @@ nnoremap <C-P> :bp<CR>
 
 " NERDTree
 map <F2> :NERDTreeToggle<CR>
+let NERDTreeShowLineNumbers = 1
+
+" Tagbar
+map <F9> :TagbarToggle<CR>
+let g:tagbar_show_linenumbers = 1
 
 "split navigations
 let g:C_Ctrl_j = 'off'

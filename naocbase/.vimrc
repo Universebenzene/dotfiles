@@ -122,7 +122,7 @@ map <F2> :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers = 1
 
 " Tagbar
-map <F9> :TagbarToggle<CR>
+map <F8> :TagbarToggle<CR>
 let g:tagbar_show_linenumbers = 1
 
 "split navigations

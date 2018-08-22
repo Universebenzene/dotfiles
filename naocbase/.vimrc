@@ -78,6 +78,7 @@ let g:tex_flavor = "latex"
 "let g:ycm_server_keep_logfiles = 1
 "let g:ycm_server_log_level = 'debug'
 "let g:ycm_global_ycm_extra_conf = '~/Documents/.ycm_extra_conf.py'
+let g:ycm_python_binary_path = "/usr/bin/python3"
 if exists("g:loaded_fix_indentkeys")
     finish
 endif

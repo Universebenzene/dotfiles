@@ -18,7 +18,7 @@ require("awful.hotkeys_popup.keys.vim")
 local xdg_menu = require("archmenu")
 -- Lain
 local lain = require("lain")
-local lainwatch = require("lainwatch")
+--local lainwatch = require("lainwatch")
 local markup = lain.util.markup
 -- Widgets icons
 img                                           = {}
@@ -371,39 +371,49 @@ local bat = lain.widget.bat({
 
 -- TouchPad
 local touchicon = wibox.widget.imagebox()
-local mytouchsig = lainwatch({
---  cmd = "/home/benzene/.local/bin/touchpadstatus",
-    cmd = { awful.util.shell, "-c", "xinput list-props bcm5974 | awk 'NR==2 {printf(\"%d\\n\",$4)}'" },
-    settings = function()
-        local stat = output:match("%d")
+-- local mytouchsig = lainwatch({
+local mytouchsig, mytouchsigTimer = awful.widget.watch(
+-- --  cmd = "/home/benzene/.local/bin/touchpadstatus",
+--     cmd = { awful.util.shell, "-c", "xinput list-props bcm5974 | awk 'NR==2 {printf(\"%d\\n\",$4)}'" },
+    { awful.util.shell, "-c", "xinput list-props bcm5974 | awk 'NR==2 {printf(\"%d\\n\",$4)}'" }, 5,
+--     settings = function()
+    function(widget, stdout)
+--         local stat = stdout:match("%d")
+        local stat = tonumber(stdout)
 
-        if stat == "1" then
+        if stat == 1 then
             touchicon:set_image(img.touchpad_enabled)
         else
             touchicon:set_image(img.touchpad_disabled)
         end
     end
-})
+)
 touchicon:buttons(gears.table.join (
           awful.button({}, 3, function()
             awful.spawn(string.format("xinput set-prop bcm5974 \"Device Enabled\" 1"))
-            mytouchsig.update()
+--          mytouchsig.update()
+            mytouchsigTimer:emit_signal("timeout")
           end),
           awful.button({}, 1, function()
             awful.spawn(string.format("xinput set-prop bcm5974 \"Device Enabled\" 0"))
-            mytouchsig.update()
+--          mytouchsig.update()
+            mytouchsigTimer:emit_signal("timeout")
           end)
 ))
 
 
 -- Ethernet status
 -- local ethicon = wibox.widget.imagebox()
--- local myethsig = lainwatch({
---     cmd = "cat /sys/class/net/enp0s3/carrier",
---     settings = function()
---         local carrier = output:match("%d")
+-- -- local myethsig = lainwatch({
+-- local myethsig, myethTimer = awful.widget.watch(
+-- --     cmd = "cat /sys/class/net/enp0s3/carrier",
+--     'bash -c "cat /sys/class/net/enp0s3/carrier"', 5,
+-- --     settings = function()
+--     function(widget, stdout)
+-- --         local carrier = output:match("%d")
+--         local carrier = tonumber(stdout)
 --
---         if carrier == "1" then
+--         if carrier == 1 then
 --             ethicon:set_image(img.ethon)
 --         else
 --             ethicon:set_image(img.ethoff)
@@ -574,7 +584,7 @@ awful.screen.connect_for_each_screen(function(s)
             swapinfo,
             touchicon,
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+--          mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
             --ethicon,
@@ -743,13 +753,15 @@ globalkeys = gears.table.join(
     awful.key({}, "XF86LaunchB",
         function ()
             os.execute(string.format("xinput set-prop bcm5974 \"Device Enabled\" 1"))
-            mytouchsig.update()
+--          mytouchsig.update()
+            mytouchsigTimer:emit_signal("timeout")
         end,
         {description = "touchpad on", group = "extra"}),
     awful.key({}, "XF86LaunchA",
         function ()
             os.execute(string.format("xinput set-prop bcm5974 \"Device Enabled\" 0"))
-            mytouchsig.update()
+--          mytouchsig.update()
+            mytouchsigTimer:emit_signal("timeout")
         end,
         {description = "touchpad off", group = "extra"}),
     -- Brightness
@@ -779,7 +791,8 @@ globalkeys = gears.table.join(
             memory.update()
             the.volume.update()
             bat.update()
-            mytouchsig.update()
+--          mytouchsig.update()
+            mytouchsigTimer:emit_signal("timeout")
         end,
         {description = "refresh some widgets", group = "extra"})
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -1079,7 +1092,8 @@ run_once("firefox &")
 run_once("evolution &")
 run_once("gnome-system-monitor &")
 --awful.spawn.with_shell("xrandr --output VGA-1 --auto")
-awful.spawn.with_shell(mytouchsig.update())
+--awful.spawn.with_shell(mytouchsig.update())
+awful.spawn.with_shell(mytouchsigTimer:emit_signal("timeout"))
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- }}}

@@ -18,7 +18,7 @@ require("awful.hotkeys_popup.keys.vim")
 local xdg_menu = require("archmenu")
 -- Lain
 local lain = require("lain")
-local lainwatch = require("lainwatch")
+--local lainwatch = require("lainwatch")
 local markup = lain.util.markup
 -- Widgets icons
 img                                           = {}
@@ -387,32 +387,40 @@ volicon:buttons(gears.table.join (
 
 -- Ethernet status
 local ethicon1 = wibox.widget.imagebox()
-local myethsig = lainwatch({
-    cmd = "cat /sys/class/net/enp0s25/carrier",
-    settings = function()
-        local carrier = output:match("%d")
+-- local myethsig = lainwatch({
+local myethsig, myethTimer = awful.widget.watch(
+--     cmd = "cat /sys/class/net/enp0s25/carrier",
+    'bash -c "cat /sys/class/net/enp0s25/carrier"', 5,
+--     settings = function()
+    function(widget, stdout)
+--         local carrier = output:match("%d")
+        local carrier = tonumber(stdout)
 
-        if carrier == "1" then
+        if carrier == 1 then
             ethicon1:set_image(img.ethon)
         else
             ethicon1:set_image(img.ethoff)
         end
     end
-})
+)
 
 local ethicon2 = wibox.widget.imagebox()
-local myethsig = lainwatch({
-    cmd = "cat /sys/class/net/enp7s0/carrier",
-    settings = function()
-        local carrier = output:match("%d")
+-- local myethsig = lainwatch({
+local myethsig, myethTimer = awful.widget.watch(
+--     cmd = "cat /sys/class/net/enp7s0/carrier",
+    'bash -c "cat /sys/class/net/enp7s0/carrier"', 5,
+--     settings = function()
+    function(widget, stdout)
+--         local carrier = output:match("%d")
+        local carrier = tonumber(stdout)
 
-        if carrier == "1" then
+        if carrier == 1 then
             ethicon2:set_image(img.ethon)
         else
             ethicon2:set_image(img.ethoff)
         end
     end
-})
+)
 --ethicon:connect_signal("button::press", function() awful.spawn(string.format("%s -e wicd-gtk", terminal)) end)
 --ethicon:connect_signal("button::press", function() awful.spawn("wicd-gtk") end)
 
@@ -577,7 +585,7 @@ awful.screen.connect_for_each_screen(function(s)
             swapinfo,
             --touchicon,
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            --mykeyboardlayout,
             wibox.widget.systray(),
             ethicon1,
             ethicon2,
@@ -782,6 +790,7 @@ globalkeys = gears.table.join(
         function ()
             memory.update()
             the.volume.update()
+            myethTimer:emit_signal("timeout")
             --bat.update()
             --mytouchsig.update()
         end,

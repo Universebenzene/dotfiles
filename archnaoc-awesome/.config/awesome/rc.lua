@@ -388,7 +388,7 @@ volicon:buttons(gears.table.join (
 -- Ethernet status
 local ethicon1 = wibox.widget.imagebox()
 -- local myethsig = lainwatch({
-local myethsig, myethTimer = awful.widget.watch(
+local myethsig1, myethTimer1 = awful.widget.watch(
 --     cmd = "cat /sys/class/net/enp0s25/carrier",
     'bash -c "cat /sys/class/net/enp0s25/carrier"', 5,
 --     settings = function()
@@ -790,6 +790,7 @@ globalkeys = gears.table.join(
         function ()
             memory.update()
             the.volume.update()
+            myethTimer1:emit_signal("timeout")
             myethTimer:emit_signal("timeout")
             --bat.update()
             --mytouchsig.update()

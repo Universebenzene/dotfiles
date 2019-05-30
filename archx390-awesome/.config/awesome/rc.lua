@@ -36,6 +36,7 @@ img.bat080                                    = "/home/benzene/.config/awesome/i
 img.bat100charging                            = "/home/benzene/.config/awesome/icons/bat-100-charging.png"
 img.bat100                                    = "/home/benzene/.config/awesome/icons/bat-100.png"
 img.batcharged                                = "/home/benzene/.config/awesome/icons/bat-charged.png"
+img.batplugged                                = "/home/benzene/.config/awesome/icons/bat-plugged.png"
 img.ethon                                     = "/home/benzene/.config/awesome/icons/ethernet-connected.png"
 img.ethoff                                    = "/home/benzene/.config/awesome/icons/ethernet-disconnected.png"
 img.volhigh                                   = "/home/benzene/.config/awesome/icons/volume-high.png"
@@ -52,9 +53,11 @@ img.wifimed                                   = "/home/benzene/.config/awesome/i
 img.wifinone 								  = "/home/benzene/.config/awesome/icons/wireless-none.png"
 img.widget_netdown                            = "/home/benzene/.config/awesome/icons/net_down.png"
 img.widget_netup                              = "/home/benzene/.config/awesome/icons/net_up.png"
-img.widget_mem                                = "/home/benzene/.config/awesome/icons/device-ram.png"
+img.widget_mem                                = "/home/benzene/.config/awesome/icons/device-ram-ori.png"
 img.touchpad_enabled                          = "/home/benzene/.config/awesome/icons/input-touchpad-symbolic.png"
 img.touchpad_disabled                         = "/home/benzene/.config/awesome/icons/touchpad-disabled-symbolic.png"
+img.trackpoint_enabled                          = "/home/benzene/.config/awesome/icons/trackpoint_enabled.png"
+img.trackpoint_disabled                         = "/home/benzene/.config/awesome/icons/trackpoint_disabled.png"
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -118,6 +121,8 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
 }
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- }}}
 
 -- {{{ Helper functions
@@ -168,8 +173,9 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 the={}
 local netdownicon = wibox.widget.imagebox(img.widget_netdown)
 local netdowninfo = wibox.widget.textbox()
+local netupinfo = wibox.widget.textbox()
 local netupicon = wibox.widget.imagebox(img.widget_netup)
-local netupinfo = lain.widget.net({
+local netwidget = lain.widget.net({
     settings = function()
 --      if iface ~= "network off" and
 --         string.match(theme.weather.widget.text, "N/A")
@@ -177,8 +183,8 @@ local netupinfo = lain.widget.net({
 --          theme.weather.update()
 --      end
 
-        widget:set_markup(markup.fontfg("Cantarell 8.4", "#e54c62", net_now.sent .. "    "))
-        netdowninfo:set_markup(markup.fontfg("Cantarell 8.4", "#87af5f", net_now.received .. " "))
+        netupinfo:set_markup(markup.fontfg("Cantarell 9", "#e54c62", net_now.sent .. "    "))
+        netdowninfo:set_markup(markup.fontfg("Cantarell 9", "#87af5f", net_now.received .. " "))
     end
 })
 
@@ -187,16 +193,16 @@ local memicon = wibox.widget.imagebox(img.widget_mem)
 local swapinfo = wibox.widget.textbox()
 local memory = lain.widget.mem({
     settings = function()
-        widget:set_markup(markup.fontfg("Cantarell 8.4", "#e0da37", " " .. mem_now.used .. "M(" .. mem_now.perc .. "%) "))
-        swapinfo:set_markup(markup.fontfg("Cantarell 8.4", "#399C20", "/" .. mem_now.swapused .. "M "))
+        widget:set_markup(markup.fontfg("Cantarell 9", "#e0da37", " " .. mem_now.used .. "M(" .. mem_now.perc .. "%) "))
+        swapinfo:set_markup(markup.fontfg("Cantarell 9", "#399C20", "/" .. mem_now.swapused .. "M "))
     end
 })
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 -- Create a textclock widget
-local mytextclock = wibox.widget.textclock()
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
+local mytextclock = wibox.widget.textclock(" %a %b %d, %H:%M:%S ", 1)
 local function rounded_shape(size, partial)
     if partial == 1 then
         return function(cr, width, height)
@@ -262,8 +268,6 @@ local month_calendar = awful.widget.calendar_popup.month({
 month_calendar:attach( mytextclock, "tr" )
 --lain.widget.calendar({
 --attach_to = { mytextclock },
---notification_preset = {
---    fg = "#aaaaaa",
 --    bg = "#222222cf",
 --    position = "top_right",
 --    font = "Source Code Pro 11"
@@ -328,102 +332,139 @@ volicon:buttons(gears.table.join (
 ))
 
 -- Battery widget
---local baticon = wibox.widget.imagebox(img.bat000)
---local battooltip = awful.tooltip({
---    objects = { baticon }
+local baticon = wibox.widget.imagebox(img.bat000)
+local battooltip = awful.tooltip({
+    objects = { baticon }
 --  margin_leftright = 15,
 --  margin_topbottom = 12
---})
---battooltip.textbox.font = "Cantarell 18"
---battooltip.timeout = 0
+})
+battooltip.textbox.font = "Cantarell 18"
+battooltip.timeout = 0
 --battooltip:set_shape(function(cr, width, height)
 --    gears.shape.infobubble(cr, width, height, corner_radius, arrow_size, width - 35)
 --end)
---local bat = lain.widget.bat({
---    timeout = 30,
---    settings = function()
---        local index, perc = "bat", tonumber(bat_now.perc) or 0
---
---        if perc <= 7 then
---            index = index .. "000"
---        elseif perc <= 20 then
---            index = index .. "020"
---        elseif perc <= 40 then
---            index = index .. "040"
---        elseif perc <= 60 then
---            index = index .. "060"
---        elseif perc <= 80 then
---            index = index .. "080"
---        elseif perc <= 100 then
---            index = index .. "100"
---        end
---
---        if bat_now.status == "Charging" then
---            index = index .. "charging"
---        end
---
---        baticon:set_image(img[index])
---        if bat_now.status == "Full" then
---            baticon:set_image(img["batcharged"])
---        end
---        battooltip:set_markup(string.format("%s%%, %s", bat_now.perc, bat_now.time))
---    end
---})
+local bat = lain.widget.bat({
+    timeout = 30,
+    settings = function()
+        local index, perc = "bat", tonumber(bat_now.perc) or 0
+
+        if perc <= 7 then
+            index = index .. "000"
+        elseif perc <= 20 then
+            index = index .. "020"
+        elseif perc <= 40 then
+            index = index .. "040"
+        elseif perc <= 60 then
+            index = index .. "060"
+        elseif perc <= 80 then
+            index = index .. "080"
+        elseif perc <= 100 then
+            index = index .. "100"
+        end
+
+        if bat_now.status == "Charging" then
+            index = index .. "charging"
+        end
+
+        baticon:set_image(img[index])
+        if bat_now.status == "Full" then
+            baticon:set_image(img["batcharged"])
+        elseif bat_now.status == "Unknown" then
+            baticon:set_image(img["batplugged"])
+        end
+        battooltip:set_markup(string.format("%s%%, %s", bat_now.perc, bat_now.time))
+    end
+})
 --         battooltip:set_markup(string.format("%s%%, %s, %s, %s, %s", bat_now.perc, bat_now.time, bat_now.ac_status, bat_now.status, index))
 
 -- TouchPad
---local touchicon = wibox.widget.imagebox()
---local mytouchsig = lainwatch({
-----  cmd = "/home/benzene/.local/bin/touchpadstatus",
---    cmd = { awful.util.shell, "-c", "xinput list-props bcm5974 | awk 'NR==2 {printf(\"%d\\n\",$4)}'" },
---    settings = function()
---        local stat = output:match("%d")
---
---        if stat == "1" then
---            touchicon:set_image(img.touchpad_enabled)
---        else
---            touchicon:set_image(img.touchpad_disabled)
---        end
---    end
---})
+local touchicon = wibox.widget.imagebox()
+-- local mytouchsig = lainwatch({
+local mytouchsig, mytouchsigTimer = awful.widget.watch(
+-- --  cmd = "/home/benzene/.local/bin/touchpadstatus",
+--     cmd = { awful.util.shell, "-c", "xinput list-props bcm5974 | awk 'NR==2 {printf(\"%d\\n\",$4)}'" },
+    { awful.util.shell, "-c", "xinput list-props Elan\\ Touchpad | awk 'NR==2 {printf(\"%d\\n\",$4)}'" }, 5,
+--     settings = function()
+    function(widget, stdout)
+--         local stat = stdout:match("%d")
+        local stat = tonumber(stdout)
+
+        if stat == 1 then
+            touchicon:set_image(img.touchpad_enabled)
+        else
+            touchicon:set_image(img.touchpad_disabled)
+        end
+    end
+)
+touchicon:buttons(gears.table.join (
+          awful.button({}, 1, function()
+            awful.spawn.easy_async_with_shell("xinput list-props Elan\\ Touchpad | awk 'NR==2 {printf(\"%d\\n\",$4)}'",
+            function(stdout)
+                local touchstatus = tonumber(stdout)
+                if touchstatus == 1 then
+                    awful.spawn(string.format("xinput set-prop Elan\\ Touchpad \"Device Enabled\" 0"))
+                else
+                    awful.spawn(string.format("xinput set-prop Elan\\ Touchpad \"Device Enabled\" 1"))
+                end
+--              mytouchsig.update()
+                mytouchsigTimer:emit_signal("timeout")
+            end)
+          end)
+--        awful.button({}, 1, function()
+--          awful.spawn(string.format("xinput set-prop Elan\\ Touchpad \"Device Enabled\" 0"))
+--          mytouchsig.update()
+--          mytouchsigTimer:emit_signal("timeout")
+--        end)
+))
+
+-- TrackPoint
+local trackicon = wibox.widget.imagebox()
+local mytracksig, mytracksigTimer = awful.widget.watch(
+    { awful.util.shell, "-c", "xinput list-props Elan\\ TrackPoint | awk 'NR==2 {printf(\"%d\\n\",$4)}'" }, 5,
+    function(widget, stdout)
+        local stat = tonumber(stdout)
+
+        if stat == 1 then
+            trackicon:set_image(img.trackpoint_enabled)
+        else
+            trackicon:set_image(img.trackpoint_disabled)
+        end
+    end
+)
+trackicon:buttons(gears.table.join (
+          awful.button({}, 1, function()
+            awful.spawn.easy_async_with_shell("xinput list-props Elan\\ TrackPoint | awk 'NR==2 {printf(\"%d\\n\",$4)}'",
+            function(stdout)
+                local trackstatus = tonumber(stdout)
+                if trackstatus == 1 then
+                    awful.spawn(string.format("xinput set-prop Elan\\ TrackPoint \"Device Enabled\" 0"))
+                else
+                    awful.spawn(string.format("xinput set-prop Elan\\ TrackPoint \"Device Enabled\" 1"))
+                end
+                mytracksigTimer:emit_signal("timeout")
+            end)
+          end)
+))
 
 
 -- Ethernet status
-local ethicon1 = wibox.widget.imagebox()
--- local myethsig = lainwatch({
-local myethsig1, myethTimer1 = awful.widget.watch(
---     cmd = "cat /sys/class/net/enp0s25/carrier",
-    'bash -c "cat /sys/class/net/enp0s25/carrier"', 5,
---     settings = function()
-    function(widget, stdout)
---         local carrier = output:match("%d")
-        local carrier = tonumber(stdout)
-
-        if carrier == 1 then
-            ethicon1:set_image(img.ethon)
-        else
-            ethicon1:set_image(img.ethoff)
-        end
-    end
-)
-
-local ethicon2 = wibox.widget.imagebox()
--- local myethsig = lainwatch({
-local myethsig, myethTimer = awful.widget.watch(
---     cmd = "cat /sys/class/net/enp7s0/carrier",
-    'bash -c "cat /sys/class/net/enp7s0/carrier"', 5,
---     settings = function()
-    function(widget, stdout)
---         local carrier = output:match("%d")
-        local carrier = tonumber(stdout)
-
-        if carrier == 1 then
-            ethicon2:set_image(img.ethon)
-        else
-            ethicon2:set_image(img.ethoff)
-        end
-    end
-)
+-- local ethicon = wibox.widget.imagebox()
+-- -- local myethsig = lainwatch({
+-- local myethsig, myethTimer = awful.widget.watch(
+-- --     cmd = "cat /sys/class/net/enp0s3/carrier",
+--     'bash -c "cat /sys/class/net/enp0s3/carrier"', 5,
+-- --     settings = function()
+--     function(widget, stdout)
+-- --         local carrier = output:match("%d")
+--         local carrier = tonumber(stdout)
+--
+--         if carrier == 1 then
+--             ethicon:set_image(img.ethon)
+--         else
+--             ethicon:set_image(img.ethoff)
+--         end
+--     end
+-- })
 --ethicon:connect_signal("button::press", function() awful.spawn(string.format("%s -e wicd-gtk", terminal)) end)
 --ethicon:connect_signal("button::press", function() awful.spawn("wicd-gtk") end)
 
@@ -533,10 +574,10 @@ awful.screen.connect_for_each_screen(function(s)
 
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
     -- Each screen has its own tag table.
-    awful.tag({ "1til" }, s, awful.layout.layouts[1])
-    tag_names = { "2til", "3til", "4til", "5bro", "6soc", "7sys", "8", "9" }
+    awful.tag({ "1ter" }, s, awful.layout.layouts[1])
+    tag_names = { "2ter", "3job", "4bro", "5soc", "6wch", "7sys", "8", "9" }
     -- layout_list={"layouts[1]","layouts[1]","layouts[1]","layouts[2]","layouts[2]","layouts[2]","layouts[3]","layouts[3]","layouts[3]"}
-    layout_list = { 1, 1, 1, 10, 1, 5, 5, 5 }
+    layout_list = { 1, 1, 10, 1, 10, 5, 5, 5 }
     for stag = 1, 8 do
         awful.tag.add(tag_names[stag], {
                       screen = s,
@@ -571,7 +612,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, bg = "#00000000", height = 19 }) -- Benz
+    s.mywibox = awful.wibar({ position = "top", screen = s, bg = "#00000000", height = 22 }) -- Benz
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -588,20 +629,20 @@ awful.screen.connect_for_each_screen(function(s)
             netdownicon,
             netdowninfo,
             netupicon,
-            netupinfo.widget,
+            netupinfo,
             memicon,
             memory.widget,
             swapinfo,
-            --touchicon,
+            touchicon,
+            trackicon,
             layout = wibox.layout.fixed.horizontal,
-            --mykeyboardlayout,
+--          mykeyboardlayout,
             wibox.widget.systray(),
-            ethicon1,
-            ethicon2,
             mytextclock,
+            --ethicon,
             --wificon,
             volicon,
-            --baticon,
+            baticon,
             s.mylayoutbox,
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -629,6 +670,13 @@ globalkeys = gears.table.join(
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
+-- -- -- -- -- Benzene's Own Config -- -- -- -- --
+    awful.key({ "Control"         }, "Print",   awful.tag.viewprev,
+              {description = "view previous", group = "tag"}),
+    awful.key({ "Mod1"            }, "Print",  awful.tag.viewnext,
+              {description = "view next", group = "tag"}),
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
@@ -731,27 +779,33 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "c", function() month_calendar:toggle() end,
               {description = "toggle calendar visiblility", group = "awesome"}),
 
+    -- Gnome screenshot
+    awful.key({}, "Print",
+        function ()
+            awful.spawn("gnome-screenshot -i &")
+        end,
+        {description = "launch gnome-screenshot", group = "extra"}),
     -- ALSA volume control
-    awful.key({ modkey }, "a",
+    awful.key({}, "XF86AudioRaiseVolume",
         function ()
             os.execute(string.format("amixer set %s 2%%+", the.volume.channel))
             the.volume.update()
             the.volume.notify()
         end,
-        {description = "volume up", group = "lain"}),
-    awful.key({ modkey }, "z",
+        {description = "volume up", group = "extra"}),
+    awful.key({}, "XF86AudioLowerVolume",
         function ()
             os.execute(string.format("amixer set %s 2%%-", the.volume.channel))
             the.volume.update()
             the.volume.notify()
         end,
-        {description = "volume down", group = "lain"}),
-    awful.key({ modkey }, "g",
+        {description = "volume down", group = "extra"}),
+    awful.key({}, "XF86AudioMute",
         function ()
             os.execute(string.format("amixer set Master toggle", the.volume.togglechannel or the.volume.channel))
             the.volume.update()
         end,
-        {description = "volume mute", group = "lain"}),
+        {description = "volume mute", group = "extra"}),
 --  awful.key({ altkey, "Control" }, "m",
 --      function ()
 --          os.execute(string.format("amixer set %s 100%%", the.volume.channel))
@@ -764,50 +818,79 @@ globalkeys = gears.table.join(
 --			the.volume.update()
 --		end)
     -- TouchPad Control
---    awful.key({}, "XF86LaunchB",
---        function ()
---            os.execute(string.format("xinput set-prop bcm5974 \"Device Enabled\" 1"))
---            mytouchsig.update()
---        end,
---        {description = "touchpad on", group = "extra"}),
---    awful.key({}, "XF86LaunchA",
---        function ()
---            os.execute(string.format("xinput set-prop bcm5974 \"Device Enabled\" 0"))
---            mytouchsig.update()
---        end,
---        {description = "touchpad off", group = "extra"}),
---    -- Brightness
---    awful.key({}, "XF86MonBrightnessUp",
---        function ()
---            os.execute(string.format("xbacklight -inc 5"))
---        end,
---        {description = "brightness up", group = "extra"}),
---    awful.key({}, "XF86MonBrightnessDown",
---        function ()
---            os.execute(string.format("xbacklight -dec 5"))
---        end,
---        {description = "brightness down", group = "extra"}),
---    -- KeyBoard Brightness
---    awful.key({}, "XF86KbdBrightnessUp",
---        function ()
---            os.execute(string.format("/home/benzene/.local/bin/kb-light.py +"))
---        end,
---        {description = "keyboard brightness up", group = "extra"}),
---    awful.key({}, "XF86KbdBrightnessDown",
---        function ()
---            os.execute(string.format("/home/benzene/.local/bin/kb-light.py -"))
---        end,
---        {description = "keyboard brightness down", group = "extra"}),
-    awful.key({ modkey }, "0",
+    awful.key({}, "XF86Display",
+        function ()
+            awful.spawn.easy_async_with_shell("xinput list-props Elan\\ Touchpad | awk 'NR==2 {printf(\"%d\\n\",$4)}'",
+            function(stdout)
+                local touchstatus = tonumber(stdout)
+                if touchstatus == 1 then
+                    awful.spawn(string.format("xinput set-prop Elan\\ Touchpad \"Device Enabled\" 0"))
+                else
+                    awful.spawn(string.format("xinput set-prop Elan\\ Touchpad \"Device Enabled\" 1"))
+                end
+--              mytouchsig.update()
+                mytouchsigTimer:emit_signal("timeout")
+            end)
+        end,
+--          os.execute(string.format("xinput set-prop Elan\\ Touchpad \"Device Enabled\" 1"))
+--          mytouchsig.update()
+--          mytouchsigTimer:emit_signal("timeout")
+--      end,
+        {description = "toggle touchpad", group = "extra"}),
+--  awful.key({}, "XF86LaunchA",
+--      function ()
+--          os.execute(string.format("xinput set-prop Elan\\ Touchpad \"Device Enabled\" 0"))
+----        mytouchsig.update()
+--          mytouchsigTimer:emit_signal("timeout")
+--      end,
+--      {description = "touchpad off", group = "extra"}),
+    -- TrackPoint Control
+    awful.key({}, "XF86Tools",
+        function ()
+            awful.spawn.easy_async_with_shell("xinput list-props Elan\\ TrackPoint | awk 'NR==2 {printf(\"%d\\n\",$4)}'",
+            function(stdout)
+                local trackstatus = tonumber(stdout)
+                if trackstatus == 1 then
+                    awful.spawn(string.format("xinput set-prop Elan\\ TrackPoint \"Device Enabled\" 0"))
+                else
+                    awful.spawn(string.format("xinput set-prop Elan\\ TrackPoint \"Device Enabled\" 1"))
+                end
+                mytracksigTimer:emit_signal("timeout")
+            end)
+        end,
+        {description = "toggle trackpoint", group = "extra"}),
+    -- Brightness
+    awful.key({}, "XF86MonBrightnessUp",
+        function ()
+            os.execute(string.format("xbacklight -inc 5"))
+        end,
+        {description = "brightness up", group = "extra"}),
+    awful.key({}, "XF86MonBrightnessDown",
+        function ()
+            os.execute(string.format("xbacklight -dec 5"))
+        end,
+        {description = "brightness down", group = "extra"}),
+--- -- KeyBoard Brightness
+--- awful.key({}, "XF86KbdBrightnessUp",
+---     function ()
+---         os.execute(string.format("/home/benzene/.local/bin/kb-light.py +"))
+---     end,
+---     {description = "keyboard brightness up", group = "extra"}),
+--- awful.key({}, "XF86KbdBrightnessDown",
+---     function ()
+---         os.execute(string.format("/home/benzene/.local/bin/kb-light.py -"))
+---     end,
+---     {description = "keyboard brightness down", group = "extra"}),
+    awful.key({}, "XF86Favorites",
         function ()
             memory.update()
             the.volume.update()
-            myethTimer1:emit_signal("timeout")
-            myethTimer:emit_signal("timeout")
-            --bat.update()
-            --mytouchsig.update()
+            bat.update()
+--          mytouchsig.update()
+            mytouchsigTimer:emit_signal("timeout")
+            mytracksigTimer:emit_signal("timeout")
         end,
-        {description = "refresh some widgets", group = "lain"})
+        {description = "refresh some widgets", group = "extra"})
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -972,8 +1055,10 @@ awful.rules.rules = {
           "pinentry",
           "veromix",
           "xtightvncviewer",
-          "Matplotlib"   -- python-matplotlib
+          "Matplotlib",  -- python-matplotlib
+          "TeamViewer"
         },
+
         name = {
           "Event Tester",  -- xev.
           "Load New Table", -- topcat browser
@@ -994,23 +1079,26 @@ awful.rules.rules = {
     -- Set Firefox to always map on the tag named "2" on screen 1.
 --     { rule = { class = "Soffice" .. "." },
 --       properties = { screen = 2, tag = "3job" } },
-    { rule = {
-        class = "okular" },
-      properties = {  tag = "3til" } },
+--  { rule = {
+--      class = "okular" },
+--    properties = {  tag = "3job" } },
     { rule = {
         class = "Firefox" },
-      properties = {  tag = "5bro" } },
---  { rule = {
---      class = "TelegramDesktop" },
---    properties = {  tag = "5soc" } },
+      properties = {  tag = "4bro" } },
     { rule = {
-        class = "Thunderbird" },
-      properties = {  tag = "6soc" } },
+        class = "TelegramDesktop" },
+      properties = {  tag = "5soc" } },
+    { rule = {
+        class = "Evolution" },
+      properties = {  tag = "5soc" } },
     { rule = {
         class = "Gnome-system-monitor" },
       properties = {  tag = "7sys" } },
     { rule = {
         class = "Gimp-2.10" },
+      properties = {  tag = "8" } },
+    { rule = {
+        class = "TeamViewer" },
       properties = {  tag = "8" } },
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -1049,7 +1137,7 @@ client.connect_signal("request::titlebars", function(c)
 
 
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
-    awful.titlebar(c, { size = 16 }) : setup {
+    awful.titlebar(c, { size = 18 }) : setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
@@ -1101,17 +1189,21 @@ function run_once(cmd)
   end
   awful.spawn.with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null  	|| (" .. cmd .. ")")
 end
---run_once("xinput set-prop bcm5974 \"Device Enabled\" 0")
+awful.spawn.with_shell("xinput set-prop Elan\\ Touchpad \"Device Enabled\" 0")
+awful.spawn.with_shell("xinput set-prop Elan\\ TrackPoint \"Device Enabled\" 0")
 run_once("compton -b")
+--run_once("xcompmgr -c")
 run_once("xfce4-terminal")
 run_once("fcitx &")
---run_once("nm-applet &")
+run_once("nm-applet &")
 run_once("firefox &")
---run_once("evolution &")
-run_once("thunderbird &")
+run_once("evolution &")
 run_once("gnome-system-monitor &")
+run_once("xgamma -gamma 1.5")
 --awful.spawn.with_shell("xrandr --output VGA-1 --auto")
 --awful.spawn.with_shell(mytouchsig.update())
+awful.spawn.with_shell(mytouchsigTimer:emit_signal("timeout"))
+awful.spawn.with_shell(mytracksigTimer:emit_signal("timeout"))
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- }}}

@@ -972,7 +972,8 @@ awful.rules.rules = {
           "pinentry",
           "veromix",
           "xtightvncviewer",
-          "Matplotlib"   -- python-matplotlib
+          "Matplotlib",  -- python-matplotlib
+          "TeamViewer"
         },
         name = {
           "Event Tester",  -- xev.
@@ -1011,6 +1012,9 @@ awful.rules.rules = {
       properties = {  tag = "7sys" } },
     { rule = {
         class = "Gimp-2.10" },
+      properties = {  tag = "8" } },
+    { rule = {
+        class = "TeamViewer" },
       properties = {  tag = "8" } },
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

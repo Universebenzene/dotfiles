@@ -972,7 +972,7 @@ awful.rules.rules = {
           "pinentry",
           "veromix",
           "xtightvncviewer",
-          "Matplotlib",  -- python-matplotlib
+          "matplotlib",  -- python-matplotlib
           "TeamViewer"
         },
         name = {

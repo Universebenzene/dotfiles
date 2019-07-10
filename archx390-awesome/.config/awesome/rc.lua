@@ -50,14 +50,14 @@ img.wififull                                  = "/home/benzene/.config/awesome/i
 img.wifihigh                                  = "/home/benzene/.config/awesome/icons/wireless-high.png"
 img.wifilow                                   = "/home/benzene/.config/awesome/icons/wireless-low.png"
 img.wifimed                                   = "/home/benzene/.config/awesome/icons/wireless-medium.png"
-img.wifinone 								  = "/home/benzene/.config/awesome/icons/wireless-none.png"
+img.wifinone                                  = "/home/benzene/.config/awesome/icons/wireless-none.png"
 img.widget_netdown                            = "/home/benzene/.config/awesome/icons/net_down.png"
 img.widget_netup                              = "/home/benzene/.config/awesome/icons/net_up.png"
 img.widget_mem                                = "/home/benzene/.config/awesome/icons/device-ram-ori.png"
 img.touchpad_enabled                          = "/home/benzene/.config/awesome/icons/input-touchpad-symbolic.png"
 img.touchpad_disabled                         = "/home/benzene/.config/awesome/icons/touchpad-disabled-symbolic.png"
-img.trackpoint_enabled                          = "/home/benzene/.config/awesome/icons/trackpoint_enabled.png"
-img.trackpoint_disabled                         = "/home/benzene/.config/awesome/icons/trackpoint_disabled.png"
+img.trackpoint_enabled                        = "/home/benzene/.config/awesome/icons/trackpoint_enabled.png"
+img.trackpoint_disabled                       = "/home/benzene/.config/awesome/icons/trackpoint_disabled.png"
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 

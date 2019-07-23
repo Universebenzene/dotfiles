@@ -999,7 +999,7 @@ awful.rules.rules = {
         class = "okular" },
       properties = {  tag = "3til" } },
     { rule = {
-        class = "Firefox" },
+        class = "firefox" },
       properties = {  tag = "5bro" } },
 --  { rule = {
 --      class = "TelegramDesktop" },

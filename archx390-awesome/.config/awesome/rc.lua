@@ -1083,7 +1083,7 @@ awful.rules.rules = {
 --      class = "okular" },
 --    properties = {  tag = "3job" } },
     { rule = {
-        class = "Firefox" },
+        class = "firefox" },
       properties = {  tag = "4bro" } },
     { rule = {
         class = "TelegramDesktop" },

@@ -135,7 +135,7 @@ theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 theme.awesome_icon = theme_assets.awesome_icon(
     theme.menu_height, theme.bg_focus, theme.fg_focus
 )
-theme.awesome_menu_icon = "/home/benzene/.config/awesome/gentoo-signet-awm.png"
+theme.awesome_menu_icon = "/home/benzene/.config/awesome/gentoo-signet-awms.png"
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.

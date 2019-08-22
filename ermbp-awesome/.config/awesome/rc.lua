@@ -125,20 +125,22 @@ awful.layout.layouts = {
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- }}}
 
+-- -- -- -- -- Awesome 4.3 -- -- -- -- --
 -- {{{ Helper functions
--- local function client_menu_toggle_fn()
---     local instance = nil
---
---     return function ()
---         if instance and instance.wibox.visible then
---             instance:hide()
---             instance = nil
---         else
---             instance = awful.menu.clients({ theme = { width = 250 } })
---         end
---     end
--- end
+local function client_menu_toggle_fn()
+    local instance = nil
+
+    return function ()
+        if instance and instance.wibox.visible then
+            instance:hide()
+            instance = nil
+        else
+            instance = awful.menu.clients({ theme = { width = 250 } })
+        end
+    end
+end
 -- }}}
+-- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
@@ -531,9 +533,12 @@ local tasklist_buttons = gears.table.join(
                                                   c:raise()
                                               end
                                           end),
-                     awful.button({ }, 3, function()
-                                              awful.menu.client_list({ theme = { width = 250 } })
-                                          end),
+-- -- -- -- -- Awesome 4.3 -- -- -- -- --
+--                      awful.button({ }, 3, function()
+--                                               awful.menu.client_list({ theme = { width = 250 } })
+--                                           end),
+-- -- -- -- -- -- -- -- -- -- -- -- -- --
+                     awful.button({ }, 3, client_menu_toggle_fn()),
                      awful.button({ }, 4, function ()
                                               awful.client.focus.byidx(-1)
                                           end),

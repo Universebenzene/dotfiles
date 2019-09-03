@@ -1,0 +1,13 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/...
+# UUID=...	/         	xfs       	rw,relatime,attr2,inode64,noquota	0 1
+# truncate -s 50G /.../archbuild.img
+# mkfs.btrfs /.../archbuild.img
+# mount -o discard,compress=lzo,autodefrag /.../archbuild.img /var/lib/archbuild
+# vim: ft=fstab
+
+# archbuild
+/home/benzene/Documents/archbuildimg/archbuild.img /var/lib/archbuild btrfs defaults,discard,compress=lzo,autodefrag 0 0

@@ -1,0 +1,1 @@
+LC_TIME=C

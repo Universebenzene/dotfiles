@@ -72,6 +72,7 @@ set bg=dark
 "set paste
 filetype plugin indent on
 
+" ycm and tex
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
 "set iskeyword+=:
@@ -105,6 +106,12 @@ while c <= 'z'
 endw
 
 set timeout ttimeoutlen=50
+
+"let g:ycm_python_binary_path = "/usr/bin/python3"
+"let g:ycm_key_invoke_completion = '<c-z>'
+"let g:ycm_complete_in_strings = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 " vim-airline
 set laststatus=2

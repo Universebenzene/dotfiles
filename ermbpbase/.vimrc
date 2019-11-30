@@ -115,6 +115,7 @@ set timeout ttimeoutlen=50
 "let g:ycm_server_python_interpreter='/usr/bin/python3.6'
 "let g:ycm_server_python_interpreter='python3.5'
 let g:ycm_complete_in_comments = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 " vim-airline
 set laststatus=2

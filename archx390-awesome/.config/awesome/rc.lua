@@ -1191,7 +1191,7 @@ function run_once(cmd)
 end
 awful.spawn.with_shell("xinput set-prop Elan\\ Touchpad \"Device Enabled\" 0")
 awful.spawn.with_shell("xinput set-prop Elan\\ TrackPoint \"Device Enabled\" 0")
-run_once("compton -b")
+run_once("picom -b")
 --run_once("xcompmgr -c")
 run_once("xfce4-terminal")
 run_once("fcitx &")

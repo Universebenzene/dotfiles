@@ -1166,7 +1166,7 @@ function run_once(cmd)
   awful.spawn.with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null  	|| (" .. cmd .. ")")
 end
 awful.spawn.with_shell("xinput set-prop bcm5974 \"Device Enabled\" 0")
-run_once("compton -b")
+run_once("picom -b")
 --run_once("xcompmgr -c")
 run_once("xfce4-terminal")
 run_once("fcitx &")

@@ -41,13 +41,13 @@
 : ${ZSH_HIGHLIGHT_STYLES[globbing]:=fg=blue}
 : ${ZSH_HIGHLIGHT_STYLES[history-expansion]:=fg=blue}
 : ${ZSH_HIGHLIGHT_STYLES[command-substitution]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]:=fg=magenta}
+: ${ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]:=fg=magenta,bold}
 : ${ZSH_HIGHLIGHT_STYLES[process-substitution]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]:=fg=magenta}
+: ${ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]:=fg=magenta,bold}
 : ${ZSH_HIGHLIGHT_STYLES[single-hyphen-option]:=none}
 : ${ZSH_HIGHLIGHT_STYLES[double-hyphen-option]:=none}
 : ${ZSH_HIGHLIGHT_STYLES[back-quoted-argument]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]:=fg=magenta}
+: ${ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]:=fg=magenta,bold}
 : ${ZSH_HIGHLIGHT_STYLES[single-quoted-argument]:=fg=yellow}
 : ${ZSH_HIGHLIGHT_STYLES[double-quoted-argument]:=fg=yellow}
 : ${ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]:=fg=yellow}

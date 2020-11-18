@@ -1048,6 +1048,7 @@ awful.rules.rules = {
           "Gpick",
           "Gimp-2.8",
           "GoldenDict",
+          "Gnome-screenshot",
           "Kruler",
           "MessageWin",  -- kalarm.
           "Sxiv",
@@ -1056,6 +1057,7 @@ awful.rules.rules = {
           "veromix",
           "xtightvncviewer",
           "matplotlib",  -- python-matplotlib
+          "Youdao Dict",
           "TeamViewer"
         },
 

@@ -1,0 +1,5 @@
+grub-mkfont -v --output=/boot/grub/themes/starfield/DejaVuSansMono24.pf2 --size=24 /usr/share/fonts/dejavu/DejaVuSansMono.ttf
+grub-mkfont -v --output=/boot/grub/themes/starfield/dejavu_20.pf2 --size=20 /usr/share/fonts/dejavu/DejaVuSans.ttf
+grub-mkfont -v --output=/boot/grub/themes/starfield/dejavu_24.pf2 --size=24 /usr/share/fonts/dejavu/DejaVuSans.ttf
+grub-mkfont -v --output=/boot/grub/themes/starfield/dejavu_28.pf2 --size=28 /usr/share/fonts/dejavu/DejaVuSans.ttf
+grub-mkfont -v --output=/boot/grub/themes/starfield/dejavu_bold_28.pf2 --size=28 /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf

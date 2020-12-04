@@ -975,6 +975,7 @@ awful.rules.rules = {
           "xtightvncviewer",
           "matplotlib",  -- python-matplotlib
           "Youdao Dict",
+          "sunloginclient",
           "TeamViewer"
         },
         name = {
@@ -1018,6 +1019,9 @@ awful.rules.rules = {
     { rule = {
         class = "TeamViewer" },
       properties = {  tag = "8" } },
+    { rule = {
+        class = "sunloginclient" },
+      properties = {  tag = "9" } },
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 

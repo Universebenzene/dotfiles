@@ -6,3 +6,4 @@ eval "$(dbus-launch --sh-syntax --exit-with-session)"
 export LANG=zh_CN.UTF-8
 light-locker &
 xrdb -merge ~/.Xresources
+xhost +

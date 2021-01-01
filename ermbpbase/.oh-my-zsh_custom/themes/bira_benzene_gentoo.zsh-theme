@@ -9,7 +9,7 @@ if [[ $UID -eq 0 ]]; then
     local user_dash="%{$fg[red]%}-%{$reset_color%}"
 else
     local user="%{$fg_bold[green]%}%n%{$reset_color%}"
-    local circlea="%{$fg[green]%}@%{$reset_color%}"
+    local circlea="%{$fg[cyan]%}@%{$reset_color%}"
     local user_symbol="%{$fg_bold[cyan]%}$%{$reset_color%}"
     local user_dash="%{$fg_bold[black]%}-%{$reset_color%}"
 #   local user_symbol="$"

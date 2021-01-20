@@ -127,18 +127,18 @@ awful.layout.layouts = {
 
 -- -- -- -- -- Awesome 4.3 -- -- -- -- --
 -- {{{ Helper functions
-local function client_menu_toggle_fn()
-    local instance = nil
-
-    return function ()
-        if instance and instance.wibox.visible then
-            instance:hide()
-            instance = nil
-        else
-            instance = awful.menu.clients({ theme = { width = 250 } })
-        end
-    end
-end
+-- local function client_menu_toggle_fn()
+--     local instance = nil
+--
+--     return function ()
+--         if instance and instance.wibox.visible then
+--             instance:hide()
+--             instance = nil
+--         else
+--             instance = awful.menu.clients({ theme = { width = 250 } })
+--         end
+--     end
+-- end
 -- }}}
 -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -504,41 +504,20 @@ local taglist_buttons = gears.table.join(
                 )
 
 local tasklist_buttons = gears.table.join(
--- -- -- -- -- Awesome 4.3 -- -- -- -- --
---                      awful.button({ }, 1, function (c)
---                                               if c == client.focus then
---                                                   c.minimized = true
---                                               else
---                                                   c:emit_signal(
---                                                       "request::activate",
---                                                       "tasklist",
---                                                       {raise = true}
---                                                   )
---                                               end
---                                           end),
--- -- -- -- -- -- -- -- -- -- -- -- -- --
                      awful.button({ }, 1, function (c)
                                               if c == client.focus then
                                                   c.minimized = true
                                               else
-                                                  -- Without this, the following
-                                                  -- :isvisible() makes no sense
-                                                  c.minimized = false
-                                                  if not c:isvisible() and c.first_tag then
-                                                      c.first_tag:view_only()
-                                                  end
-                                                  -- This will also un-minimize
-                                                  -- the client, if needed
-                                                  client.focus = c
-                                                  c:raise()
+                                                  c:emit_signal(
+                                                      "request::activate",
+                                                      "tasklist",
+                                                      {raise = true}
+                                                  )
                                               end
                                           end),
--- -- -- -- -- Awesome 4.3 -- -- -- -- --
---                      awful.button({ }, 3, function()
---                                               awful.menu.client_list({ theme = { width = 250 } })
---                                           end),
--- -- -- -- -- -- -- -- -- -- -- -- -- --
-                     awful.button({ }, 3, client_menu_toggle_fn()),
+                     awful.button({ }, 3, function()
+                                              awful.menu.client_list({ theme = { width = 250 } })
+                                          end),
                      awful.button({ }, 4, function ()
                                               awful.client.focus.byidx(-1)
                                           end),
@@ -593,28 +572,19 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc(-1) end), -- Benz
                            awful.button({ }, 5, function () awful.layout.inc( 1) end)))
--- -- -- -- -- Awesome 4.3 -- -- -- -- --
---    -- Create a taglist widget
---    s.mytaglist = awful.widget.taglist {
---        screen  = s,
---        filter  = awful.widget.taglist.filter.all,
---        buttons = taglist_buttons
---    }
---
---    -- Create a tasklist widget
---    s.mytasklist = awful.widget.tasklist {
---        screen  = s,
---        filter  = awful.widget.tasklist.filter.currenttags,
---        buttons = tasklist_buttons
---    }
--- -- -- -- -- -- -- -- -- -- -- -- -- --
--- -- -- -- -- -- -- -- -- -- -- -- -- --
     -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
+    s.mytaglist = awful.widget.taglist {
+        screen  = s,
+        filter  = awful.widget.taglist.filter.all,
+        buttons = taglist_buttons
+    }
 
     -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
-
+    s.mytasklist = awful.widget.tasklist {
+        screen  = s,
+        filter  = awful.widget.tasklist.filter.currenttags,
+        buttons = tasklist_buttons
+    }
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, bg = "#00000000", height = 26 }) -- Benz

@@ -13,7 +13,14 @@ let g:Tex_UsePython = 0
 
 let g:Tex_DefaultTargetFormat = 'pdf'
 
+"xe only
 let g:Tex_CompileRule_pdf = 'xelatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+
+""raa
+"let g:Tex_FormatDependency_pdf='dvi,pdf'
+"let g:Tex_MultipleCompileFormats = 'dvi'
+"""let g:Tex_CompileRule_dvipdf= 'dvipdfm $*.dvi'
+"""let g:Tex_CompileRule_pdf = 'dvipdfm $*.dvi'
 
 let g:Tex_ViewRule_pdf = 'okular'
 

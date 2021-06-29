@@ -97,7 +97,7 @@ editor_cmd = terminal .. " -e " .. editor
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
+modkey = "Mod1" -- Benz
 
 -- Table of layouts to cover with awful.layout.inc, order matters. -- Benz
 awful.layout.layouts = {
@@ -143,6 +143,8 @@ myawesomemenu = {
    { "edit config", editor_cmd .. "\\ " .. awesome.conffile }, -- Benz
    { "restart", awesome.restart },
    { "quit", function() awesome.quit() end },
+   { "restart lightdm", function() awful.spawn.with_shell("systemctl restart lightdm") end }, -- Benz
+   { "reboot", function() awful.spawn.with_shell("systemctl reboot") end }, -- Benz
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
@@ -644,6 +646,8 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
+    awful.key({ modkey, "Control" }, "w", function () mymainmenu:show() end,
+              {description = "show main menu", group = "awesome"}),
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
@@ -1118,8 +1122,8 @@ run_once("fcitx &")
 --run_once("nm-applet &")
 run_once("firefox &")
 --run_once("evolution &")
---run_once("teamviewer &")
---run_once("sunloginclient &")
+run_once("teamviewer &")
+run_once("sunloginclient &")
 run_once("thunderbird &")
 run_once("gnome-system-monitor &")
 --awful.spawn.with_shell("xrandr --output VGA-1 --auto")

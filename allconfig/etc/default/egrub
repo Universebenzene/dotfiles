@@ -13,6 +13,7 @@ GRUB_DISTRIBUTOR="Gentoo"
 
 # Default menu entry
 GRUB_DEFAULT=0
+GRUB_DISABLE_OS_PROBER=false
 
 # Boot the default entry this many seconds after the menu is displayed
 #GRUB_TIMEOUT=5

@@ -34,9 +34,45 @@ local git_branch="$(git_prompt_info)"
 
 PROMPT='┌[${user}${circlea}${host} ]${user_dash}[${time24}]${current_dir} $(git_prompt_info)
 └[%{$fg[magenta]%}$(filenum)%{$reset_color%}] %B${user_symbol}%b '
-RPS1="%B${return_code}%b"
 #PS2=$'\e[0;33m%}%BContinue%{\e[0m%}%b > '
 PS2=$'\e[0;33m%}%B%_ %{\e[0m%}%b\e[0;36m%}(Continue)%{\e[0m%} > '
+
+local timer_show=0
+local min_show_time=1
+
+function preexec() {
+    timer=${timer:-$SECONDS}
+}
+
+function displaytime {
+    local T=$1
+    local D=$((T/60/60/24))
+    local H=$((T/60/60%24))
+    local M=$((T/60%60))
+    local S=$((T%60))
+    [[ $D > 0 ]] && printf '%dd ' $D
+    [[ $H > 0 ]] && printf '%dh ' $H
+    [[ $M > 0 ]] && printf '%dm ' $M
+    printf '%ds' $S
+}
+
+function precmd() {
+    if [ $timer ]; then
+        timer_s=$(($SECONDS - $timer))
+#       timer_s= #test
+        timer_show=$(displaytime $timer_s)
+        if [[ $timer_s -ge $min_show_time ]]; then
+            RPS1="%B${return_code}%b %{$fg_bold[yellow]%}${timer_show}"
+        else
+            RPS1="%B${return_code}%b"
+        fi
+        unset timer
+    fi
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook preexec preexec
+add-zsh-hook precmd precmd
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}{"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"

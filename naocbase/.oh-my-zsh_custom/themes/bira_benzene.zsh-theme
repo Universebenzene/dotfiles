@@ -37,6 +37,7 @@ PROMPT='┌[${user}${circlea}${host} ]${user_dash}[${time24}]${current_dir} $(gi
 #PS2=$'\e[0;33m%}%BContinue%{\e[0m%}%b > '
 PS2=$'\e[0;33m%}%B%_ %{\e[0m%}%b\e[0;36m%}(Continue)%{\e[0m%} > '
 
+local timer_s=0
 local timer_show=0
 local min_show_time=1
 
@@ -62,7 +63,7 @@ function precmd() {
 #       timer_s= #test
         timer_show=$(displaytime $timer_s)
         if [[ $timer_s -ge $min_show_time ]]; then
-            RPS1="%B${return_code}%b %{$fg_bold[yellow]%}${timer_show}"
+            RPS1="%B${return_code}%b %{$fg_bold[yellow]%}${timer_show}%b"
         else
             RPS1="%B${return_code}%b"
         fi

@@ -92,6 +92,7 @@ function fillbar() {
 
 PROMPT='┌[${user}${circlea}${host} ]${user_dash}[${time24}]${current_dir} $(git_prompt_info)${PS_TAIL}
 └[%{$fg[magenta]%}$(filenum)%{$reset_color%}] %B${user_symbol}%b '
+PS2=$'\e[0;33m%}%B%_ %{\e[0m%}%b\e[0;36m%}(Continue)%{\e[0m%} > '
 
 autoload -Uz add-zsh-hook
 add-zsh-hook preexec preexec

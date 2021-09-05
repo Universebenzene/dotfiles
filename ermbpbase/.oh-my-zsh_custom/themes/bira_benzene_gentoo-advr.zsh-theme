@@ -9,17 +9,18 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[yellow]%}}"
 
 if [[ $UID -eq 0 ]]; then
     local user="%{$fg_bold[red]%}%n%{$reset_color%}"
+    local circlea="%{$fg[magenta]%}@%{$reset_color%}"
     local user_symbol="%{$fg_bold[red]%}#%{$reset_color%}"
     local user_dash="%{$fg[red]%}-%{$reset_color%}"
 else
     local user="%{$fg_bold[green]%}%n%{$reset_color%}"
+    local circlea="%{$fg[cyan]%}@%{$reset_color%}"
     local user_symbol="%{$fg_bold[cyan]%}$%{$reset_color%}"
     local user_dash="%{$fg_bold[black]%}-%{$reset_color%}"
 #   local user_symbol="$"
 fi
 
-local host="%{$fg_bold[cyan]%}%m%{$reset_color%}"
-local circlea="%{$fg[cyan]%}@%{$reset_color%}"
+local host="%{$fg_bold[magenta]%}%m%{$reset_color%}"
 local time24="%{$fg[yellow]%}%*%{$reset_color%}"
 local current_dir="%{$fg_bold[blue]%} %~%{$reset_color%}"
 function filenum {

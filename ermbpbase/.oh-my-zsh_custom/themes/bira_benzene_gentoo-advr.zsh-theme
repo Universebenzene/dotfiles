@@ -70,7 +70,7 @@ function fillbar() {
         timer_s=$(($SECONDS - $timer))
 #       timer_s= #test
     fi
-    timer_show=$(displaytime $timer_s)
+    timer_show=$(eval echo $(displaytime $timer_s))
     time_len=${#timer_show}
     local nts=6
     (( fillsn = ${COLUMNS} - ${#${(%):-[%n@%m-]-[%*]-%~}} - branch_len - time_len - nts ))

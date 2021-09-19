@@ -375,19 +375,19 @@ pvolicon:buttons(gears.table.join (
           end),
           awful.button({}, 2, function()
             awful.spawn(string.format("pactl set-sink-volume %s 100%%", the.pvolume.device))
-            the.pvolume.notify()
+            the.pvolume.update()    -- update or notify?
           end),
           awful.button({}, 3, function()
             awful.spawn(string.format("pactl set-sink-mute %s toggle", the.pvolume.device))
-            the.pvolume.notify()
+            the.pvolume.update()    -- update or notify?
           end),
           awful.button({}, 4, function()
             awful.spawn(string.format("pactl set-sink-volume %s +1%%", the.pvolume.device))
-            the.pvolume.update()
+            the.pvolume.update()    -- update or notify?
           end),
           awful.button({}, 5, function()
             awful.spawn(string.format("pactl set-sink-volume %s -1%%", the.pvolume.device))
-            the.pvolume.update()
+            the.pvolume.update()    -- update or notify?
           end)
 ))
 

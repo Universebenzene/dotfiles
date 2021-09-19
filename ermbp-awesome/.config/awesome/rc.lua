@@ -281,19 +281,76 @@ month_calendar:attach( mytextclock, "tr" )
 
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
 -- ALSA widget
-local volicon = wibox.widget.imagebox()
-local voltip = awful.tooltip({
-    objects = { volicon }
-})
-voltip.textbox.font = "Cantarell 15"
-voltip.timeout = 0
-the.volume = lain.widget.alsabar({
-    togglechannel = "IEC958,3",
-    notification_preset = { font = "Monospace 12", fg = "#aaaaaa", bg = "#222222cc" },
-    settings = function()
-        local index, perc = "", tonumber(volume_now.level) or 0
+-- local volicon = wibox.widget.imagebox()
+-- local voltip = awful.tooltip({
+--     objects = { volicon }
+-- })
+-- voltip.textbox.font = "Cantarell 15"
+-- voltip.timeout = 0
+-- the.volume = lain.widget.alsabar({
+--     togglechannel = "IEC958,3",
+--     notification_preset = { font = "Monospace 12", fg = "#aaaaaa", bg = "#222222cc" },
+--     settings = function()
+--         local index, perc = "", tonumber(volume_now.level) or 0
+--
+--         if volume_now.status == "off" then
+--             index = "volmutedblocked"
+--         else
+--             if perc <= 5 then
+--                 index = "volmuted"
+--             elseif perc <= 25 then
+--                 index = "vollow"
+--             elseif perc <= 75 then
+--                 index = "volmed"
+--             else
+--                 index = "volhigh"
+--             end
+--         end
+--
+--         volicon:set_image(img[index])
+--         voltip:set_markup(string.format("%d%%", volume_now.level))
+--     end
+-- })
+-- volicon:buttons(gears.table.join (
+--           awful.button({}, 1, function()
+--             awful.spawn.with_shell(string.format("%s -e alsamixer", terminal))
+--           end),
+--           awful.button({}, 2, function()
+--             awful.spawn(string.format("%s set %s 100%%", the.volume.cmd, the.volume.channel))
+--             the.volume.notify()
+--           end),
+--           awful.button({}, 3, function()
+--             awful.spawn(string.format("%s set %s toggle", the.volume.cmd, the.volume.togglechannel or the.volume.channel))
+--             the.volume.notify()
+--           end),
+--           awful.button({}, 4, function()
+--             awful.spawn(string.format("%s set %s 1%%+", the.volume.cmd, the.volume.channel))
+--             the.volume.notify()
+--           end),
+--           awful.button({}, 5, function()
+--             awful.spawn(string.format("%s set %s 1%%-", the.volume.cmd, the.volume.channel))
+--             the.volume.notify()
+--           end)
+-- ))
 
-        if volume_now.status == "off" then
+-- PULSE widget
+local pvolicon = wibox.widget.imagebox()
+local pvoltip = awful.tooltip({
+    objects = { pvolicon }
+})
+pvoltip.textbox.font = "Cantarell 15"
+pvoltip.timeout = 0
+the.pvolume = lain.widget.pulsebar({
+    notification_preset = { font = "Monospace 12", fg = "#aaaaaa", bg = "#222222cc" },
+--  margins = 4,    -- pvolbar
+    tick = "█",
+    tick_none = "─",
+    tick_pre = "┠",
+    tick_post = "┨",
+    settings = function()
+        local index, perc = "", tonumber(volume_now.left) or 0
+
+        if volume_now.muted == "yes" then
             index = "volmutedblocked"
         else
             if perc <= 5 then
@@ -307,29 +364,30 @@ the.volume = lain.widget.alsabar({
             end
         end
 
-        volicon:set_image(img[index])
-        voltip:set_markup(string.format("%d%%", volume_now.level))
+        pvolicon:set_image(img[index])
+        pvoltip:set_markup(string.format("%d%%", volume_now.left))
     end
 })
-volicon:buttons(gears.table.join (
+-- local pvolbar = the.pvolume.bar -- pvolbar
+pvolicon:buttons(gears.table.join (
           awful.button({}, 1, function()
-            awful.spawn.with_shell(string.format("%s -e alsamixer", terminal))
+            awful.spawn("pavucontrol")
           end),
           awful.button({}, 2, function()
-            awful.spawn(string.format("%s set %s 100%%", the.volume.cmd, the.volume.channel))
-            the.volume.notify()
+            awful.spawn(string.format("pactl set-sink-volume %s 100%%", the.pvolume.device))
+            the.pvolume.notify()
           end),
           awful.button({}, 3, function()
-            awful.spawn(string.format("%s set %s toggle", the.volume.cmd, the.volume.togglechannel or the.volume.channel))
-            the.volume.notify()
+            awful.spawn(string.format("pactl set-sink-mute %s toggle", the.pvolume.device))
+            the.pvolume.notify()
           end),
           awful.button({}, 4, function()
-            awful.spawn(string.format("%s set %s 1%%+", the.volume.cmd, the.volume.channel))
-            the.volume.notify()
+            awful.spawn(string.format("pactl set-sink-volume %s +1%%", the.pvolume.device))
+            the.pvolume.update()
           end),
           awful.button({}, 5, function()
-            awful.spawn(string.format("%s set %s 1%%-", the.volume.cmd, the.volume.channel))
-            the.volume.notify()
+            awful.spawn(string.format("pactl set-sink-volume %s -1%%", the.pvolume.device))
+            the.pvolume.update()
           end)
 ))
 
@@ -616,7 +674,9 @@ awful.screen.connect_for_each_screen(function(s)
             mytextclock,
             --ethicon,
             --wificon,
-            volicon,
+            --volicon,
+            pvolicon,
+            --pvolbar,
             baticon,
             s.mylayoutbox,
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -747,25 +807,33 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "c", function() month_calendar:toggle() end,
               {description = "toggle calendar visiblility", group = "awesome"}),
 
-    -- ALSA volume control
+    -- ALSA/PULSE volume control
     awful.key({}, "XF86AudioRaiseVolume",
         function ()
-            os.execute(string.format("amixer set %s 2%%+", the.volume.channel))
-            the.volume.update()
-            the.volume.notify()
+            os.execute(string.format("pactl set-sink-volume %s +2%%", the.pvolume.device))
+            the.pvolume.update()
+            the.pvolume.notify()
+            --os.execute(string.format("amixer set %s 2%%+", the.volume.channel))
+            --the.volume.update()
+            --the.volume.notify()
         end,
         {description = "volume up", group = "extra"}),
     awful.key({}, "XF86AudioLowerVolume",
         function ()
-            os.execute(string.format("amixer set %s 2%%-", the.volume.channel))
-            the.volume.update()
-            the.volume.notify()
+            os.execute(string.format("pactl set-sink-volume %s -2%%", the.pvolume.device))
+            the.pvolume.update()
+            the.pvolume.notify()
+            --os.execute(string.format("amixer set %s 2%%-", the.volume.channel))
+            --the.volume.update()
+            --the.volume.notify()
         end,
         {description = "volume down", group = "extra"}),
     awful.key({}, "XF86AudioMute",
         function ()
-            os.execute(string.format("amixer set Master toggle", the.volume.togglechannel or the.volume.channel))
-            the.volume.update()
+            os.execute(string.format("pactl set-sink-mute %s toggle", the.pvolume.device))
+            the.pvolume.update()
+            --os.execute(string.format("amixer set Master toggle", the.volume.togglechannel or the.volume.channel))
+            --the.volume.update()
         end,
         {description = "volume mute", group = "extra"}),
 --  awful.key({ altkey, "Control" }, "m",
@@ -831,7 +899,8 @@ globalkeys = gears.table.join(
     awful.key({}, "XF86AudioPlay",
         function ()
             memory.update()
-            the.volume.update()
+--          the.volume.update()
+            the.pvolume.update()
             bat.update()
 --          mytouchsig.update()
             mytouchsigTimer:emit_signal("timeout")

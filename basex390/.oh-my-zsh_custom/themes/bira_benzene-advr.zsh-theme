@@ -2,7 +2,7 @@
 local return_code="%(?..%{$fg[red]%}%? <┘%{$reset_color%})"
 local line_code="%(?..%{$fg[red]%}%? <┐%{$reset_color%})"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}{"
+ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[yellow]%}{"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%}*%{$reset_color%}%{$fg[yellow]%}}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[yellow]%}}"
@@ -60,7 +60,7 @@ function fillbar() {
     local git_branch_n="$(git_current_branch)"
     branch_len=0
     if [[ ${#git_branch_n} -ne 0 ]]; then
-        (( branch_len = ${#git_branch_n} + 2 ))
+        (( branch_len = ${#git_branch_n} + 3 ))
         if [[ -n $(git status -s 2> /dev/null) ]]; then
             (( branch_len = branch_len + 1 ))
         fi
@@ -71,7 +71,7 @@ function fillbar() {
     fi
     timer_show=$(eval echo $(displaytime $timer_s))
     time_len=${#timer_show}
-    local nts=6
+    local nts=5
     (( fillsn = ${COLUMNS} - ${#${(%):-[%n@%m-]-[%*]-%~}} - branch_len - time_len - nts ))
     fillss=" "
     while [ ${#fillss} -lt ${fillsn} ]; do fillss=" ${fillss}"; done
@@ -91,7 +91,7 @@ function fillbar() {
     unset timer
 }
 
-PROMPT='┌[${user}${circlea}${host} ]${user_dash}[${time24}]${current_dir} $(git_prompt_info)${PS_TAIL}
+PROMPT='┌[${user}${circlea}${host} ]${user_dash}[${time24}]${current_dir}$(git_prompt_info)${PS_TAIL}
 └[%{$fg[magenta]%}$(filenum)%{$reset_color%}] %B${user_symbol}%b '
 PS2=$'\e[0;33m%}%B%_ %{\e[0m%}%b\e[0;36m%}(Continue)%{\e[0m%} > '
 

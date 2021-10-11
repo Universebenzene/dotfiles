@@ -45,7 +45,7 @@ function preexec() {
 }
 
 function dir_stat() {
-    test -w $(pwd) && echo "" || echo "%{$fg[red]%} ! %{$reset_color%}"
+    test -w $(pwd) && echo "" || echo "%{$fg[red]%} !%{$reset_color%}"
 }
 
 function displaytime {
@@ -75,7 +75,7 @@ function fillbar() {
     fi
     timer_show=$(eval echo $(displaytime $timer_s))
     time_len=${#timer_show}
-    test -w $(pwd) && dirst_show="" || dirst_show=" x "
+    test -w $(pwd) && dirst_show="" || dirst_show=" x"
     dirst_len=${#dirst_show}
     local nts=5
     (( fillsn = ${COLUMNS} - ${#${(%):-[%n@%m-]-[%*]-%~}} - dirst_len - branch_len - time_len - nts ))

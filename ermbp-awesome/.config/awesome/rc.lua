@@ -698,6 +698,7 @@ root.buttons(gears.table.join(
 -- }}}
 
 -- {{{ Key bindings
+-- xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description = "show help", group = "awesome"}),

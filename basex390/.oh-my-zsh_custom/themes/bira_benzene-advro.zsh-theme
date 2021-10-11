@@ -26,6 +26,10 @@ function filenum {
     echo $(ls | wc -l)
 }
 
+function dir_stat() {
+    test -w $(pwd) && echo "" || echo "%{$fg[red]%} !%{$reset_color%}"
+}
+
 local rvm_ruby=''
 if which rvm-prompt &> /dev/null; then
   rvm_ruby='%{$fg[red]%}‹$(rvm-prompt i v g)›%{$reset_color%}'
@@ -42,10 +46,6 @@ local min_show_time=1
 
 function preexec() {
     timer=${timer:-$SECONDS}
-}
-
-function dir_stat() {
-    test -w $(pwd) && echo "" || echo "%{$fg[red]%} !%{$reset_color%}"
 }
 
 function displaytime {

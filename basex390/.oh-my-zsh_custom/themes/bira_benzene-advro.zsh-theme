@@ -83,7 +83,7 @@ function fillbar() {
     while [ ${#fillss} -lt ${fillsn} ]; do fillss=" ${fillss}"; done
 #   (( dfs = ${#${(%):-[%n@%m-]-[%*]-%~}} + ${branch_len} + ${time_len} + ${nts} )) # show -[${dfs}]-[${COLUMNS}]
     if [[ $timer_s -ge $min_show_time ]]; then
-        if [[ "${#${(%):-[%n@%m-]-[%*]-%~}} + ${branch_len} + ${time_len} + ${nts}" -ge ${COLUMNS} ]]; then
+        if [[ "${#${(%):-[%n@%m-]-[%*]-%~}} + ${dirst_len} + ${branch_len} + ${time_len} + ${nts}" -ge ${COLUMNS} ]]; then
             PS_TAIL=''
             RPS1="%B${line_code}%b %{$reset_color%}%{$fg_bold[yellow]%}${timer_show}%b%{$fg[blue]%} <<%b"
         else

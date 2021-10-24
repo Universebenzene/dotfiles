@@ -78,12 +78,12 @@ function fillbar() {
     dirst_len=${#dirst_show}
     local nts=5
     local nds=4 #=%num of current_dir
-    # shorter than nes..\w then ../\w
+    # shorter than nes..\w then ..\w
     (( fillsn = ${COLUMNS} - ${#${(%):-[%n@%m-]-[%*]-%~}} - dirst_len - branch_len - time_len - nts ))
     if [[ "${#${(%):-[%n@%m-]-[%*]-%~}} + ${dirst_len} + ${branch_len} + 1" -lt ${COLUMNS} ]]; then
         current_dir="%{$fg_bold[blue]%} %~%{$reset_color%}"
     elif [[ "${#${(%):-[%n@%m-]-[%*]-..%1~}} + ${nds} + ${dirst_len} + ${branch_len} + 1" -ge ${COLUMNS} ]]; then
-        current_dir="%{$fg_bold[blue]%} ../%1~%{$reset_color%}"
+        current_dir="%{$fg_bold[blue]%} ..%1~%{$reset_color%}"
     else
         (( cdr_len=${COLUMNS} - ${#${(%):-[%n@%m-]-[%*]-..}} - dirst_len - branch_len - nds ))
         current_dir="%{$fg_bold[blue]%} %${nds}>>%~%>>%${cdr_len}<..<%~%<<%{$reset_color%}"

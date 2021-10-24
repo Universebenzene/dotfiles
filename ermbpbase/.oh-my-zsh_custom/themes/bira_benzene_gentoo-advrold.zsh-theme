@@ -78,15 +78,15 @@ function fillbar() {
     dirst_len=${#dirst_show}
     local nts=5
     local nds=4 #=%num of current_dir
-    # shorter than /x/y/../\w then ../\w
+    # shorter than /x/y..\w then ..\w
     (( fillsn = ${COLUMNS} - ${#${(%):-[%n@%m-]-[%*]-%~}} - dirst_len - branch_len - time_len - nts ))
     if [[ "${#${(%):-[%n@%m-]-[%*]-%~}} + ${dirst_len} + ${branch_len} + 1" -lt ${COLUMNS} ]]; then
         current_dir="%{$fg_bold[blue]%} %~%{$reset_color%}"
-    elif [[ "${#${(%):-[%n@%m-]-[%*]-%-2~/../%1~}} + ${dirst_len} + ${branch_len} + 1" -ge ${COLUMNS} ]]; then
-        current_dir="%{$fg_bold[blue]%} ../%1~%{$reset_color%}"
+    elif [[ "${#${(%):-[%n@%m-]-[%*]-%-2~..%1~}} + ${dirst_len} + ${branch_len} + 1" -ge ${COLUMNS} ]]; then
+        current_dir="%{$fg_bold[blue]%} ..%1~%{$reset_color%}"
     else
-        (( cdr_len=${COLUMNS} - ${#${(%):-[%n@%m-]-[%*]-%-2~/..}} - dirst_len - branch_len ))
-        current_dir="%{$fg_bold[blue]%} %-2~/%${cdr_len}<..<%~%<<%{$reset_color%}"
+        (( cdr_len=${COLUMNS} - ${#${(%):-[%n@%m-]-[%*]-%-2~..}} - dirst_len - branch_len ))
+        current_dir="%{$fg_bold[blue]%} %-2~%${cdr_len}<..<%~%<<%{$reset_color%}"
     fi
     fillss=" "
     while [ ${#fillss} -lt ${fillsn} ]; do fillss=" ${fillss}"; done

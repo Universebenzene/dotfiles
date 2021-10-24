@@ -9,16 +9,17 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[yellow]%}}"
 
 if [[ $UID -eq 0 ]]; then
     local user="%{$fg_bold[red]%}%n%{$reset_color%}"
+    local circlea="%{$fg[magenta]%}@%{$reset_color%}"
     local user_symbol="%{$fg_bold[red]%}#%{$reset_color%}"
     local user_dash="%{$fg[red]%}-%{$reset_color%}"
 else
     local user="%{$fg_bold[green]%}%n%{$reset_color%}"
+    local circlea="%{$fg[cyan]%}@%{$reset_color%}"
     local user_symbol="%{$fg_bold[cyan]%}$%{$reset_color%}"
     local user_dash="%{$fg_bold[black]%}-%{$reset_color%}"
 fi
 
-local host="%{$fg_bold[cyan]%}%m%{$reset_color%}"
-local circlea="%{$fg[cyan]%}@%{$reset_color%}"
+local host="%{$fg_bold[magenta]%}%m%{$reset_color%}"
 local time24="%{$fg[yellow]%}%*%{$reset_color%}"
 function filenum {
     echo $(ls | wc -l)
@@ -77,11 +78,12 @@ function fillbar() {
     dirst_len=${#dirst_show}
     local nts=5
     local nds=4 #=%num of current_dir
-    local nes=4 # shorter than nds..nes then full
-    (( adl = nds + nes + 2 ))
+    # shorter than nes..\w then ../\w
     (( fillsn = ${COLUMNS} - ${#${(%):-[%n@%m-]-[%*]-%~}} - dirst_len - branch_len - time_len - nts ))
-    if [[ "${#${(%):-[%n@%m-]-[%*]-%~}} + ${dirst_len} + ${branch_len} + 1" -lt ${COLUMNS} ]] || [[ "${#${(%):-[%n@%m-]-[%*]-}} + ${adl} + ${dirst_len} + ${branch_len} + 1" -ge ${COLUMNS} ]]; then
+    if [[ "${#${(%):-[%n@%m-]-[%*]-%~}} + ${dirst_len} + ${branch_len} + 1" -lt ${COLUMNS} ]]; then
         current_dir="%{$fg_bold[blue]%} %~%{$reset_color%}"
+    elif [[ "${#${(%):-[%n@%m-]-[%*]-..%1~}} + ${nds} + ${dirst_len} + ${branch_len} + 1" -ge ${COLUMNS} ]]; then
+        current_dir="%{$fg_bold[blue]%} ../%1~%{$reset_color%}"
     else
         (( cdr_len=${COLUMNS} - ${#${(%):-[%n@%m-]-[%*]-..}} - dirst_len - branch_len - nds ))
         current_dir="%{$fg_bold[blue]%} %${nds}>>%~%>>%${cdr_len}<..<%~%<<%{$reset_color%}"

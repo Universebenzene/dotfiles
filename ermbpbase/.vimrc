@@ -73,6 +73,7 @@ set expandtab       "change tab into space
 "set ignorecase
 "set hlsearch
 set bg=dark
+set showcmd
 "set paste
 filetype plugin indent on
 

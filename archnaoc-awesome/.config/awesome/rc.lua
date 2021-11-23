@@ -1053,14 +1053,14 @@ awful.rules.rules = {
           "xtightvncviewer",
           "matplotlib",  -- python-matplotlib
           "Youdao Dict",
-          "sunloginclient",
-          "TeamViewer"
+          "sunloginclient"
         },
         name = {
           "Event Tester",  -- xev.
           "Load New Table", -- topcat browser
           "我的足迹",      -- firefox history
-          "关于 Mozilla Firefox" -- about firefox
+          "关于 Mozilla Firefox", -- about firefox
+          "TeamViewer"
         },
         role = {
           "AlarmWindow",  -- Thunderbird's calendar.
@@ -1095,7 +1095,7 @@ awful.rules.rules = {
         class = "Gimp-2.10" },
       properties = {  tag = "8" } },
     { rule = {
-        class = "TeamViewer" },
+        name = "TeamViewer" },
       properties = {  tag = "8" } },
     { rule = {
         class = "sunloginclient" },

@@ -427,7 +427,7 @@ local bat = lain.widget.bat({
         baticon:set_image(img[index])
         if bat_now.status == "Full" then
             baticon:set_image(img["batcharged"])
-        elseif bat_now.status == "Unknown" then
+        elseif bat_now.status == "Unknown" or bat_now.status == "Not charging" then
             baticon:set_image(img["batplugged"])
         end
         battooltip:set_markup(string.format("%s%%, %s", bat_now.perc, bat_now.time))
@@ -1276,7 +1276,7 @@ run_once("picom -b")
 run_once("xfce4-terminal")
 run_once("fcitx &")
 run_once("nm-applet &")
-run_once("firefox &")
+--run_once("firefox &")
 run_once("evolution &")
 run_once("copyq &")
 run_once("gnome-system-monitor &")

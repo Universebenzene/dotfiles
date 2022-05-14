@@ -1,0 +1,21 @@
+#!/sbin/openrc-run
+# Copyright 2022 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+name="killtracker daemon"
+description="kill tracker when tracker-miner process running"
+supervisor="supervise-daemon"
+healthcheck_delay=5
+healthcheck_timer=1
+respawn_max=0
+command=/usr/bin/sleep
+command_args="86400"
+
+healthcheck() {
+	psid=$(ps -ef | tr -s " " | cut -d " " -f 2,8 | grep tracker-miner-fs-3 | grep -v $0 | awk '{print $1}')
+	[[ ! -n $psid ]] || return 1
+}
+
+unhealthy() {
+	/usr/bin/killall tracker-miner-fs-3
+}

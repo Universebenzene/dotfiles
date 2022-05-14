@@ -1182,12 +1182,12 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
 -- Autorun
 function run_once(cmd)
-  findme = cmd
-  firstspace = cmd:find(" ")
-  if firstspace then
-    findme = cmd:sub(0, firstspace-1)
-  end
-  awful.spawn.with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null  	|| (" .. cmd .. ")")
+    findme = cmd
+    firstspace = cmd:find(" ")
+    if firstspace then
+        findme = cmd:sub(0, firstspace-1)
+    end
+    awful.spawn.with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null  	|| (" .. cmd .. ")")
 end
 --run_once("xinput set-prop bcm5974 \"Device Enabled\" 0")
 run_once("picom -b")

@@ -112,8 +112,8 @@ awful.layout.layouts = {
     awful.layout.suit.tile.top,
     awful.layout.suit.tile.left,
     awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
+    awful.layout.suit.spiral.dwindle,
     -- awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.magnifier,
     -- awful.layout.suit.corner.nw,
@@ -633,9 +633,9 @@ awful.screen.connect_for_each_screen(function(s)
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
     -- Each screen has its own tag table.
     awful.tag({ "1ter" }, s, awful.layout.layouts[1])
-    tag_names = { "2ter", "3job", "4bro", "5soc", "6wch", "7sys", "8", "9" }
+    tag_names = { "2ter", "3job", "4bro", "5soc", "6spt", "7sys", "8", "9" }
     -- layout_list={"layouts[1]","layouts[1]","layouts[1]","layouts[2]","layouts[2]","layouts[2]","layouts[3]","layouts[3]","layouts[3]"}
-    layout_list = { 1, 1, 10, 1, 10, 5, 5, 5 }
+    layout_list = { 1, 1, 9, 1, 10, 5, 5, 5 }
     for stag = 1, 8 do
         awful.tag.add(tag_names[stag], {
                       screen = s,
@@ -890,6 +890,11 @@ globalkeys = gears.table.join(
 --			os.execute(string.format("amixer -q set %s 0%%", the.volume.channel))
 --			the.volume.update()
 --		end)
+    awful.key({}, "XF86AudioMicMute",
+        function ()
+            os.execute(string.format("pactl set-source-mute 1 toggle"))
+        end,
+        {description = "microphone mute", group = "extra"}),
     -- TouchPad Control
     awful.key({}, "XF86Display",
         function ()
@@ -1262,15 +1267,15 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
 -- Autorun
 function run_once(cmd)
-  findme = cmd
-  firstspace = cmd:find(" ")
-  if firstspace then
-    findme = cmd:sub(0, firstspace-1)
-  end
-  awful.spawn.with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null  	|| (" .. cmd .. ")")
+    findme = cmd
+    firstspace = cmd:find(" ")
+    if firstspace then
+        findme = cmd:sub(0, firstspace-1)
+    end
+    awful.spawn.with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null  	|| (" .. cmd .. ")")
 end
 awful.spawn.with_shell("xinput set-prop Elan\\ Touchpad \"Device Enabled\" 0")
-awful.spawn.with_shell("xinput set-prop Elan\\ TrackPoint \"Device Enabled\" 0")
+--awful.spawn.with_shell("xinput set-prop Elan\\ TrackPoint \"Device Enabled\" 0")
 run_once("picom -b")
 --run_once("xcompmgr -c")
 run_once("xfce4-terminal")

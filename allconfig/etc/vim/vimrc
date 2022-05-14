@@ -1,0 +1,5 @@
+" For Arch Linux use /etc/vimrc
+let g:loaded_youcompleteme = 1  " disable ycm
+unlet loaded_youcompleteme  " enable ycm
+
+let g:ycm_auto_trigger = 1  " 1 for enable; 0 for disable

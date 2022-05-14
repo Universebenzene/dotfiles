@@ -17,5 +17,6 @@ healthcheck() {
 }
 
 unhealthy() {
+	# Can't run `tracker3 reset -s -r` directly in init scripts
 	/usr/bin/killall tracker-miner-fs-3
 }

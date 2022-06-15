@@ -1,2 +1,3 @@
-# list of process not allowed
+# array of not allowed processes
+# e.g.: PLIST=("process_a" "process_b" "process_c")
 PLIST=("tracker-miner-fs-3")

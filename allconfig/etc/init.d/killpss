@@ -15,13 +15,13 @@ healthcheck() {
 	# ${PLIST} defined in /etc/conf.d/killpss
 	for pls in ${PLIST[@]}; do
 		local psid=$(ps -ef | tr -s " " | cut -d " " -f 2,8 | grep ${pls} | grep -v $0 | awk '{print $1}')
-		[[ ! -n $psid ]] || return 1
+		[[ -z $psid ]] || return 1
 	done
 }
 
 unhealthy() {
 	for pls in ${PLIST[@]}; do
 		local psid=$(ps -ef | tr -s " " | cut -d " " -f 2,8 | grep ${pls} | grep -v $0 | awk '{print $1}')
-		[[ ! -n $psid ]] || /usr/bin/killall ${pls}
+		[[ -z $psid ]] || /usr/bin/killall ${pls}
 	done
 }

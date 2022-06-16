@@ -13,7 +13,7 @@ command_args="86400"
 
 healthcheck() {
 	psid=$(ps -ef | tr -s " " | cut -d " " -f 2,8 | grep tracker-miner-fs-3 | grep -v $0 | awk '{print $1}')
-	[[ ! -n $psid ]] || return 1
+	[[ -z $psid ]] || return 1
 }
 
 unhealthy() {

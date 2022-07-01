@@ -22,9 +22,13 @@
 # /dev/sda5
 
 # truncate -s 100G /.../portagebuild
-# mkfs.ext4 /.../portagebuild
+# mkfs.ext4/btrfs /.../portagebuild
 # mount ...
 # vim: ft=fstab
 
 # portagebuild
-/home/benzene/Documents/learning/portagebuild/portagebuild /var/tmp/portage ext4 rw,relatime,data=ordered 0 0
+#/home/benzene/Documents/learning/portagebuild/portagebuild /var/tmp/portage ext4 rw,relatime,data=ordered 0 0
+/home/benzene/Documents/learning/portagebuild/portagebuild.img /var/tmp/portage btrfs defaults,discard,compress=lzo,autodefrag 0 0
+
+# portagedist
+/home/benzene/Documents/learning/portagebuild/portagedist.img /usr/portage/distfiles btrfs defaults,discard,compress=lzo,autodefrag 0 0

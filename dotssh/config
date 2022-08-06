@@ -1,0 +1,12 @@
+# vim: ft=sshconfig
+# AUR
+Host aur.archlinux.org
+    HostName aur.archlinux.org
+    ProxyCommand /usr/bin/nc -X 5 -x 127.0.0.1:1080 %h %p
+
+# github account
+# git clone foobar:foobar/repo.git
+Host foobar
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/foobar_rsa

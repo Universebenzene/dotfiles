@@ -1087,7 +1087,7 @@ awful.rules.rules = {
 --      class = "TelegramDesktop" },
 --    properties = {  tag = "5soc" } },
     { rule = {
-        class = "Thunderbird" },
+        class = "thunderbird" },
       properties = {  tag = "6soc" } },
     { rule = {
         class = "Gnome-system-monitor" },
@@ -1098,6 +1098,30 @@ awful.rules.rules = {
     { rule = {
         name = "TeamViewer" },
       properties = {  tag = "8" } },
+    { rule = {
+        name = "PGPLOT Window 1" },
+      properties = {  tag = "9" } },
+    { rule = {
+        name = "PGPLOT Window 2" },
+      properties = {  tag = "9" } },
+    { rule = {
+        name = "PGPLOT Window 3" },
+      properties = {  tag = "9" } },
+    { rule = {
+        name = "PGPLOT Window 4" },
+      properties = {  tag = "9" } },
+    { rule = {
+        name = "PGPLOT Window 5" },
+      properties = {  tag = "9" } },
+    { rule = {
+        name = "PGPLOT Window 6" },
+      properties = {  tag = "9" } },
+    { rule = {
+        name = "PGPLOT Window 7" },
+      properties = {  tag = "9" } },
+    { rule = {
+        name = "PGPLOT Window 8" },
+      properties = {  tag = "9" } },
     { rule = {
         class = "sunloginclient" },
       properties = {  tag = "9" } },

@@ -6,6 +6,7 @@ Host aur.archlinux.org
 
 # github account
 # git clone foobar:foobar/repo.git
+# git config --local user.xxx "xxxx"
 Host foobar
     HostName github.com
     User git

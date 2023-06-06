@@ -19,6 +19,7 @@ require("awful.hotkeys_popup.keys")
 local xdg_menu = require("archmenu")
 -- Lain
 local lain = require("lain")
+local pipe_pulsebar = require("pipe_pulsebar")
 --local lainwatch = require("lainwatch")
 local markup = lain.util.markup
 -- Widgets icons
@@ -338,7 +339,11 @@ local pvoltip = awful.tooltip({
 })
 pvoltip.textbox.font = "Cantarell 15"
 pvoltip.timeout = 0
-the.pvolume = lain.widget.pulsebar({
+-- Switch between PA & PW
+-- PA to PW: install pipewire-pulse
+-- PW to PA: install pulseaudio-bluetooth remove pipewire-audio
+-- the.pvolume = lain.widget.pulsebar({
+the.pvolume = pipe_pulsebar({
     notification_preset = { font = "Monospace 12", fg = "#aaaaaa", bg = "#222222cc" },
 --  margins = 4,    -- pvolbar
     tick = "█",

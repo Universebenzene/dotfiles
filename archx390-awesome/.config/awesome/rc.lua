@@ -898,7 +898,11 @@ globalkeys = gears.table.join(
 --		end)
     awful.key({}, "XF86AudioMicMute",
         function ()
-            os.execute(string.format("pactl set-source-mute 1 toggle"))
+            awful.spawn.easy_async_with_shell("pactl get-default-source",
+            function(stdout)
+                local microsource = string.match(stdout, "(%S+)\n")
+                os.execute(string.format("pactl set-source-mute %s toggle", microsource))
+            end)
         end,
         {description = "microphone mute", group = "extra"}),
     -- TouchPad Control

@@ -52,7 +52,7 @@ local function factory(args)
     pipe_pulsebar.notification_preset = args.notification_preset
     pipe_pulsebar.devicetype          = args.devicetype or "sink"
     pipe_pulsebar.udevicetype         = pipe_pulsebar.devicetype:gsub("^%l",string.upper)
-    pipe_pulsebar.cmd                 = args.cmd or "pactl list " .. pipe_pulsebar.devicetype .. "s | sed -n -e '/" .. pipe_pulsebar.udevicetype .. " #/p' -e '/Base Volume/d' -e '/Volume:/p' -e '/Mute:/p' -e '/device\\.string/p'"
+    pipe_pulsebar.cmd                 = args.cmd or "LANG=en_US.UTF-8 pactl list " .. pipe_pulsebar.devicetype .. "s | sed -n -e '/" .. pipe_pulsebar.udevicetype .. " #/p' -e '/Base Volume/d' -e '/Volume:/p' -e '/Mute:/p' -e '/device\\.string/p'"
 
     if not pipe_pulsebar.notification_preset then
         pipe_pulsebar.notification_preset = {
@@ -75,16 +75,23 @@ local function factory(args)
     pipe_pulsebar.tooltip = awful.tooltip({ objects = { pipe_pulsebar.bar } })
 
     function pipe_pulsebar.update(callback)
+        volume_now = {}
         helpers.async({ awful.util.shell, "-c", type(pipe_pulsebar.cmd) == "string" and pipe_pulsebar.cmd or pipe_pulsebar.cmd() },
         function(s)
-            volume_now = {
-                index  = string.match(s, " #(%S+)") or "N/A",
-                device = string.match(s, "device.string = \"(%S+)\"") or "N/A",
-                muted  = string.match(s, "Mute: (%S+)") or "N/A"
-            }
+            volume_now.device = string.match(s, "device.string = \"(%S+)\"") or "N/A"
+        end)
 
+        helpers.async({ awful.util.shell, "-c", string.format("LANG=en_US.UTF-8 pactl list %ss | grep -B 2 'Name: '$(pactl get-default-%s)", pipe_pulsebar.devicetype, pipe_pulsebar.devicetype) },
+        function(s)
+            volume_now.index = string.match(s, " #(%S+)") or "N/A"
             pipe_pulsebar.device = volume_now.index
+        end)
 
+        helpers.async({ awful.util.shell, "-c", string.format("LANG=en_US.UTF-8 pactl get-%s-mute @DEFAULT_%s@", pipe_pulsebar.devicetype, string.upper(pipe_pulsebar.devicetype)) }, function(s)
+            volume_now.muted = string.match(s, "Mute: (%S+)") or "N/A"
+        end)
+
+        helpers.async({ awful.util.shell, "-c", string.format("LANG=en_US.UTF-8 pactl get-%s-volume @DEFAULT_%s@", pipe_pulsebar.devicetype, string.upper(pipe_pulsebar.devicetype)) }, function(s)
             local ch = 1
             volume_now.channel = {}
             for v in string.gmatch(s, ":.-(%d+)%%") do

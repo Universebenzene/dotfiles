@@ -77,7 +77,7 @@ local function factory(args)
 
     function pipe_pulsebar.update(callback)
         helpers.async({ awful.util.shell, "-c", type(pipe_pulsebar.cmd) == "string" and pipe_pulsebar.cmd or pipe_pulsebar.cmd() },
-         function(s)
+        function(s)
             volume_now = {
                 index = string.match(s, " #(%S+)") or "N/A",
                 muted  = string.match(s, "Mute: (%S+)") or "N/A"

@@ -1,0 +1,2 @@
+# limit su groups
+auth		required	pam_wheel.so group=portage

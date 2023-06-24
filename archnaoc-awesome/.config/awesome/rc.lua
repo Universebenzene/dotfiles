@@ -19,6 +19,7 @@ require("awful.hotkeys_popup.keys")
 local xdg_menu = require("archmenu")
 -- Lain
 local lain = require("lain")
+local pipe_pulsebar = require("pipe_pulsebar")
 --local lainwatch = require("lainwatch")
 local markup = lain.util.markup
 -- Widgets icons
@@ -336,7 +337,7 @@ local pvoltip = awful.tooltip({
 })
 pvoltip.textbox.font = "Cantarell 15"
 pvoltip.timeout = 0
-the.pvolume = lain.widget.pulsebar({
+the.pvolume = pipe_pulsebar({
     notification_preset = { font = "Monospace 12", fg = "#aaaaaa", bg = "#222222cc" },
 --  margins = 4,    -- pvolbar
     tick = "█",
@@ -1217,13 +1218,13 @@ end
 --run_once("xinput set-prop bcm5974 \"Device Enabled\" 0")
 run_once("picom -b")
 run_once("xfce4-terminal")
-run_once("fcitx &")
+run_once("fcitx5 &")
 --run_once("nm-applet &")
 --run_once("firefox &")
 --run_once("evolution &")
 run_once("teamviewer &")
 run_once("sunloginclient &")
-run_once("thunderbird &")
+run_once("thunderbird-bin &")
 run_once("xfce4-clipman &")
 run_once("gnome-system-monitor &")
 --awful.spawn.with_shell("xrandr --output VGA-1 --auto")

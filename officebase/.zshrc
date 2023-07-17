@@ -1,14 +1,14 @@
 # vim: filetype=sh
 # If you come from bash you might have to change your $PATH.
-export ZSH=/usr/share/oh-my-zsh/
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-#export ZSH=$HOME/.oh-my-zsh
+export ZSH=/usr/share/zsh/site-contrib/oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="bira_benzene-advrold"
+ZSH_THEME="bira_benzene_gentoo-advrold"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -128,13 +128,13 @@ esac
 #=========Science Software=========#
 #export PGPLOT_DEV=/XWINDOW
 export PGPLOT_DEV=/CPS
-export PGPLOT_FONT=/usr/lib/grfont.dat
-export PGPLOT_RGB=/usr/lib/rgb.txt
+export PGPLOT_FONT=/usr/lib64/pgplot/grfont.dat
+export PGPLOT_RGB=/usr/lib64/pgplot/rgb.txt
 #==================================#
 
 #=========Other zsh Plugins========#
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/site-contrib/zsh-autosuggestions/zsh-autosuggestions.zsh
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/site-functions/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 #==================================#

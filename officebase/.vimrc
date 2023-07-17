@@ -179,7 +179,7 @@ augroup gentoo
   " characters at all) isn't a Unicode file, but is in the default encoding.
   " Except of course if a byte-order mark is in effect.
   autocmd BufReadPost *
-        \ if exists("g:added_fenc_utf8") && &fileencoding == "utf-8" && 
+        \ if exists("g:added_fenc_utf8") && &fileencoding == "utf-8" &&
         \    ! &bomb && search('[\x80-\xFF]','nw') == 0 && &modifiable |
         \       set fileencoding= |
         \ endif
@@ -202,9 +202,9 @@ endif
 " file exists for the said language.
 if exists("+omnifunc")
    autocmd Filetype *
-	      \	if &omnifunc == "" |
-	      \		setlocal omnifunc=syntaxcomplete#Complete |
-	      \	endif
+          \	if &omnifunc == "" |
+          \		setlocal omnifunc=syntaxcomplete#Complete |
+          \	endif
 endif
 
 " {{{ vimrc.local
@@ -266,7 +266,7 @@ endw
 set timeout ttimeoutlen=50
 
 " ycm
-"let g:ycm_auto_trigger = 1  " 1 for enable; 0 for disable
+let g:ycm_auto_trigger = 1  " 1 for enable; 0 for disable
 "let g:SuperTabDefaultCompletionType="context"
 "let g:ycm_server_python_interpreter='/usr/bin/python3.6'
 "let g:ycm_server_python_interpreter='python3.6'

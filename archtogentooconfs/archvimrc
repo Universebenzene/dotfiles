@@ -1,0 +1,18 @@
+syntax on
+set nu
+set autoindent
+set cindent
+set shiftwidth=4
+set ai!
+set tabstop=4
+set expandtab
+"set ignorecase
+set hlsearch
+set bg=dark
+filetype plugin indent on
+"set grepprg=grep\ -nH\ $*
+"let g:tex_flavor = "latex"
+"set iskeyword+=:
+"set paste
+"let g:ycm_server_keep_logfiles = 1
+"let g:ycm_server_log_level = 'debug'

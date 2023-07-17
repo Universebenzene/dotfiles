@@ -113,7 +113,7 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar
 theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = "/home/benzene/.config/awesome/gentoomicroquasar.png"
+theme.wallpaper = "/home/gsadmin/.config/awesome/gentoomicroquasar.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
@@ -137,7 +137,7 @@ theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 theme.awesome_icon = theme_assets.awesome_icon(
     theme.menu_height, theme.bg_focus, theme.fg_focus
 )
-theme.awesome_menu_icon = "/home/benzene/.config/awesome/gentoo-signet-awms.png"
+theme.awesome_menu_icon = "/home/gsadmin/.config/awesome/gentoo-signet-awms.png"
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.

@@ -53,6 +53,7 @@ export ZSH_CUSTOM=~/.oh-my-zsh_custom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git colored-man-pages sudovim autojump)
+export GROFF_NO_SGR=1   # https://bugs.archlinux.org/task/79053 https://t.me/archlinuxcn_group/2869412
 
 
 # User configuration

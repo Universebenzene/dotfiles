@@ -154,3 +154,7 @@ map! <C-a> <Home>
 map! <C-e> <End>
 map <C-a> <Home>
 map <C-e> <End>
+
+" indentLine
+let g:vim_json_conceal=0
+let g:markdown_syntax_conceal=0

@@ -2,5 +2,6 @@
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
-export XDG_CURRENT_DESKTOP=GNOME
+# rm ~/.config/QtProject.conf if qt file dialog hang
+# export XDG_CURRENT_DESKTOP=GNOME
 light-locker &

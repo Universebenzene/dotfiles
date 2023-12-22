@@ -36,7 +36,7 @@
 : ${ZSH_HIGHLIGHT_STYLES[suffix-alias]:=fg=green,underline}
 : ${ZSH_HIGHLIGHT_STYLES[global-alias]:=fg=cyan,bold}
 : ${ZSH_HIGHLIGHT_STYLES[precommand]:=fg=green,underline}
-: ${ZSH_HIGHLIGHT_STYLES[commandseparator]:=none}
+: ${ZSH_HIGHLIGHT_STYLES[commandseparator]:=fg=blue,bold}
 #: ${ZSH_HIGHLIGHT_STYLES[path]:=underline}
 : ${ZSH_HIGHLIGHT_STYLES[path]:=fg=white,underline}
 : ${ZSH_HIGHLIGHT_STYLES[path_pathseparator]:=}
@@ -47,8 +47,8 @@
 : ${ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]:=fg=magenta,bold}
 : ${ZSH_HIGHLIGHT_STYLES[process-substitution]:=none}
 : ${ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]:=fg=magenta,bold}
-: ${ZSH_HIGHLIGHT_STYLES[single-hyphen-option]:=fg=yellow}
-: ${ZSH_HIGHLIGHT_STYLES[double-hyphen-option]:=fg=cyan}
+: ${ZSH_HIGHLIGHT_STYLES[single-hyphen-option]:=fg=white}
+: ${ZSH_HIGHLIGHT_STYLES[double-hyphen-option]:=fg=green}
 : ${ZSH_HIGHLIGHT_STYLES[back-quoted-argument]:=none}
 : ${ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]:=fg=magenta,bold}
 : ${ZSH_HIGHLIGHT_STYLES[single-quoted-argument]:=fg=yellow}
@@ -59,7 +59,7 @@
 : ${ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]:=fg=cyan,bold}
 : ${ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]:=fg=cyan,bold}
 : ${ZSH_HIGHLIGHT_STYLES[assign]:=none}
-: ${ZSH_HIGHLIGHT_STYLES[redirection]:=none}
+: ${ZSH_HIGHLIGHT_STYLES[redirection]:=fg=yellow}
 : ${ZSH_HIGHLIGHT_STYLES[comment]:=fg=cyan}
 : ${ZSH_HIGHLIGHT_STYLES[named-fd]:=none}
 : ${ZSH_HIGHLIGHT_STYLES[arg0]:=fg=green,bold}

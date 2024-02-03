@@ -38,6 +38,7 @@
 : ${ZSH_HIGHLIGHT_STYLES[precommand]:=fg=green,underline}
 : ${ZSH_HIGHLIGHT_STYLES[commandseparator]:=fg=blue,bold}
 #: ${ZSH_HIGHLIGHT_STYLES[path]:=underline}
+: ${ZSH_HIGHLIGHT_STYLES[autodirectory]:=fg=blue,bold,underline}
 : ${ZSH_HIGHLIGHT_STYLES[path]:=fg=white,underline}
 : ${ZSH_HIGHLIGHT_STYLES[path_pathseparator]:=}
 : ${ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]:=}

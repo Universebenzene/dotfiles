@@ -1219,7 +1219,7 @@ end
 run_once("picom -b")
 run_once("xfce4-terminal")
 run_once("fcitx5 &")
---run_once("nm-applet &")
+run_once("nm-applet &")
 --run_once("firefox &")
 --run_once("evolution &")
 run_once("teamviewer &")

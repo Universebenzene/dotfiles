@@ -1184,7 +1184,7 @@ awful.rules.rules = {
         class = "Evolution" },
       properties = {  tag = "5soc" } },
     { rule = {
-        class = "Gnome-system-monitor" },
+        class = "gnome-system-monitor" },
       properties = {  tag = "7sys" } },
     { rule = {
         class = "Gimp-2.10" },

@@ -59,7 +59,7 @@
 : ${ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]:=fg=cyan,bold}
 : ${ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]:=fg=cyan,bold}
 : ${ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]:=fg=cyan,bold}
-: ${ZSH_HIGHLIGHT_STYLES[assign]:=none}
+: ${ZSH_HIGHLIGHT_STYLES[assign]:=fg=cyan,bold}
 : ${ZSH_HIGHLIGHT_STYLES[redirection]:=fg=yellow}
 : ${ZSH_HIGHLIGHT_STYLES[comment]:=fg=cyan}
 : ${ZSH_HIGHLIGHT_STYLES[named-fd]:=none}

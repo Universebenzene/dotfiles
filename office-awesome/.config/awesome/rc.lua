@@ -1124,6 +1124,9 @@ awful.rules.rules = {
         name = "PGPLOT Window 8" },
       properties = {  tag = "9" } },
     { rule = {
+        name = "RustDesk" },
+      properties = {  tag = "7sys" } },
+    { rule = {
         class = "sunloginclient" },
       properties = {  tag = "9" } },
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -1224,6 +1227,7 @@ run_once("nm-applet &")
 --run_once("evolution &")
 run_once("teamviewer &")
 run_once("sunloginclient &")
+run_once("rustdesk &")
 run_once("thunderbird-bin &")
 run_once("xfce4-clipman &")
 run_once("gnome-system-monitor &")

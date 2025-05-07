@@ -258,8 +258,8 @@ local month_calendar = awful.widget.calendar_popup.month({
     style_focus = {
         shape = rounded_shape(5, 1),
         fg_color = "#000000",
-        bg_color = "#1793d1ee",
-        border_color = "#1793d1aa"
+        bg_color = "#b197ffee",
+        border_color = "#b197ffaa"
     }
 })
 month_calendar:attach( mytextclock, "tr" )

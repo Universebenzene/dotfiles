@@ -632,7 +632,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, bg = "#00000000", height = 19 }) -- Benz
+    s.mywibox = awful.wibar({ position = "top", screen = s, bg = "#00000000", height = 26 }) -- Benz
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -1166,7 +1166,7 @@ client.connect_signal("request::titlebars", function(c)
 
 
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
-    awful.titlebar(c, { size = 16 }) : setup {
+    awful.titlebar(c, { size = 21 }) : setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
@@ -1219,7 +1219,7 @@ function run_once(cmd)
     awful.spawn.with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null  	|| (" .. cmd .. ")")
 end
 --run_once("xinput set-prop bcm5974 \"Device Enabled\" 0")
-run_once("picom -b")
+run_once("picom -b --backend glx")
 run_once("xfce4-terminal")
 run_once("fcitx5 &")
 run_once("nm-applet &")

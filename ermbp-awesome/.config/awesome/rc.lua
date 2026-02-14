@@ -663,6 +663,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
             awful.button({ }, 4, function() awful.client.focus.byidx(-1) end),
             awful.button({ }, 5, function() awful.client.focus.byidx( 1) end),
         }
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     }
 
     -- Create the wibox
@@ -670,8 +672,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
         position = "top",
         screen   = s,
 -- -- -- -- -- Benzene's Own Config -- -- -- -- --
-        bg = "#00000000",
-        height = 26,
+        bg       = "#00000000",
+        height   = 26,
         widget   = {
             layout = wibox.layout.align.horizontal,
             { -- Left widgets
@@ -683,7 +685,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             },
             s.mytasklist, -- Middle widget
             { -- Right widgets
--- -- --     -- -- Benzene's Own Config -- -- -- -- --
+-- -- -- -- -- Benzene's Own Config -- -- -- -- --
                 netdownicon,
                 netdowninfo,
                 netupicon,
@@ -703,8 +705,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 --pvolbar,
                 baticon,
                 s.mylayoutbox,
--- -- --     -- -- -- -- -- -- -- -- -- -- -- -- -- --
--- -- --     -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
             },
         }
     }
@@ -1146,7 +1148,7 @@ end)
 
 
 -- Set keys
---4.3--root.keys(globalkeys)
+--4.3--root.keys(globalkeys)    ----!!! break show_help
 -- }}}
 
 -- {{{ Rules
@@ -1249,20 +1251,20 @@ ruled.client.connect_signal("request::rules", function()
     }
     ruled.client.append_rule {
         rule       = { class = "gnome-system-monitor" },
-        properties = { tag = "7sys"          }
+        properties = { tag = "7sys"                   }
     }
     ruled.client.append_rule {
         rule       = { class = "Gimp-2.10"   },
-        properties = { tag = "8" }
+        properties = { tag = "8"             }
     }
     ruled.client.append_rule {
-        rule       = { name = "TeamViewer"  },
-        properties = { tag = "8"            }
+        rule       = { name = "TeamViewer"   },
+        properties = { tag = "8"             }
     }
     ruled.client.append_rule {
         rule       = { class = "sunloginclient" },
-      properties   = { tag = "9"            }
-  }
+        properties = { tag = "9"                }
+    }
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 end)

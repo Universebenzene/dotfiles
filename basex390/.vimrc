@@ -159,3 +159,4 @@ map <C-e> <End>
 " IndentLinesToggle to turn on/off
 let g:vim_json_conceal=0
 let g:markdown_syntax_conceal=0
+autocmd FileType tex IndentLinesDisable
